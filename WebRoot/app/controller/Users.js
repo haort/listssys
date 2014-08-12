@@ -90,20 +90,25 @@ Ext.define('LSYS.controller.Users', {
     }
     ,
     changePage:function(view, rec, item, index, e){
-    	var gridStore = this.getUserlist().getStore();
-    	gridStore.setProxy({
-            type: 'ajax',
-            api: {
-                read: 'data/users2.json',
-                update: 'data/updateUsers.json'
-            },
-            reader: {
-                type: 'json',
-                root: 'users',
-                successProperty: 'success'
-            }
-        });
-    	gridStore.load();
+    	var params = {record:rec.get("text")};  
+    	var isLeaf = rec.get("leaf");
+    	if(isLeaf){
+    		var gridStore = this.getUserlist().getStore();
+        	gridStore.setProxy({
+                type: 'ajax',
+                api: {
+                    read: '/listssys/json/reportList.json',
+                    update: 'data/updateUsers.json'
+                },
+                reader: {
+                    type: 'json',
+                    root: 'users',
+                    successProperty: 'success'
+                }
+            });
+    		Ext.apply(gridStore.proxy.extraParams, params);  
+    		gridStore.load();
+    	}
     }
     
 });

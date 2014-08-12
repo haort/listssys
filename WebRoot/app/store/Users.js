@@ -2,7 +2,6 @@ Ext.define('LSYS.store.Users', {
     extend: 'Ext.data.Store',
     model: 'LSYS.model.User',
     pageSize:2,
-    autoLoad: true,
   /*  data:[
         {id: 1, name: 'a',    email: 'ed@sencha.com'},
         {id: 2, name: 'b', email: 'tommy@sencha.com'},

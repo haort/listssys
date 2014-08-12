@@ -15,7 +15,7 @@ public class ReportService {
 	@Resource(name="reportDao")
 	private ReportDao reportDao;
 	
-	public List<Report> findReports(){
-		return reportDao.selectReports();
+	public List<Report> findReports(String record){
+		return reportDao.selectReports(record);
 	}
 }

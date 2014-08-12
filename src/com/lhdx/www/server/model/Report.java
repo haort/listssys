@@ -4,6 +4,7 @@ public class Report {
 	private int id;
 	private String name;
 	private String addr;
+	private String phone;
 	private String acc;
 	private String area;
 	private String startdt;
@@ -57,6 +58,12 @@ public class Report {
 	}
 	public void setOwn(String own) {
 		this.own = own;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 }
