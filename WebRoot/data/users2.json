@@ -1,0 +1,8 @@
+{
+    success: true,
+    users:[
+        {id: 1, name: '汤巧玲',    email: 'ed@sencha.com'},
+        {id: 2, name: '小汤圆', email: 'tommy@sencha.com'},
+        {id: 3, name: '郝仁珽',    email: 'ed@sencha.com'}
+        ]
+}

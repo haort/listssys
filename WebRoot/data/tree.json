@@ -1,0 +1,23 @@
+{
+    	  id:'root',
+    	  text:'root',
+        children: [
+            {   id:'ch',
+                text: '201406',
+                children: [
+                    { id: 'array-grid', text: 'paidan1', leaf: true },
+                    { id: 'grouped-grid', text: '2', leaf: true },
+                    { id: 'locking-grid', text: '3', leaf: true },
+                    { id: 'grouped-header-grid', text: '4', leaf: true },
+                    { id: 'multi-sort-grid', text: '5', leaf: true },
+                    { id: 'progress-bar-pager', text: 'Progress Bar Pager', leaf: true },
+                    { id: 'sliding-pager', text: 'Sliding Pager', leaf: true },
+                    { id: 'reconfigure-grid', text: 'Reconfigure Grid', leaf: true },
+                    { id: 'property-grid', text: 'Property Grid', leaf: true },
+                    { id: 'cell-editing', text: 'Cell Editing', leaf: true },
+                    { id: 'row-expander-grid', text: 'Row Expander', leaf: true },
+                    { id: 'big-data-grid', text: 'Big Data', leaf: true }
+                ]
+            }
+        ]
+    }
