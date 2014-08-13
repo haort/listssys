@@ -8,7 +8,7 @@ Ext.define('LSYS.view.Pie', {
             legend: {
                 position: 'right'
             },
-            insetPadding: 30,
+            insetPadding: 40,
             theme: 'Base:gradients',
             series: [{
                 type: 'pie',
@@ -37,7 +37,7 @@ Ext.define('LSYS.view.Pie', {
                     field: 'name',
                     display: 'rotate',
                     contrast: true,
-                    font: '14px 微软雅黑'
+                    font: '14px 黑体'
                 }
             }]
         });

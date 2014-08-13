@@ -103,6 +103,7 @@ Ext.define('LSYS.controller.Users', {
                 reader: {
                     type: 'json',
                     root: 'users',
+                    totalProperty: 'totalCount',
                     successProperty: 'success'
                 }
             });

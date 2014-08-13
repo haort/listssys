@@ -1,6 +1,8 @@
 package com.lhdx.www.server.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -15,7 +17,13 @@ public class ReportService {
 	@Resource(name="reportDao")
 	private ReportDao reportDao;
 	
-	public List<Report> findReports(String record){
-		return reportDao.selectReports(record);
+	public Map<String,Object> findReports(int start,int size,String record){
+		 List<Report> list = reportDao.selectReports(start, size, record);
+		 long count = reportDao.countReports(record);
+		 Map<String,Object> map = new HashMap<String,Object>();  
+	     map.put("users", list);  
+	     map.put("totalCount", count);
+	    
+		return map;
 	}
 }

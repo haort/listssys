@@ -1,7 +1,8 @@
 package com.lhdx.www.server.web;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -16,14 +17,15 @@ import com.lhdx.www.server.service.ReportService;
 @Controller
 public class ReportController {
 
-	@Resource(name="reportService") 
+	@Resource(name = "reportService")
 	private ReportService reportService;
-	
+
 	@RequestMapping(value = "/reportList")
-	public @ResponseBody List<Report> getReports(@RequestParam(value = "record", required = false) String record) {
-		List<Report> list = reportService.findReports(record);
-		return list;
+	public @ResponseBody
+	Map getReports(
+			@RequestParam(value = "start", required = false) int start,
+			@RequestParam(value = "limit", required = false) int size,
+			@RequestParam(value = "record", required = false) String record) {
+		return reportService.findReports(start, size, record);
 	}
 }
-
-

@@ -36,7 +36,7 @@ Ext.define('LSYS.view.Viewport', {
            },
           { 
            xtype: 'userlist',
-           flex:3
+           flex:4
          }]
     }]
 });
