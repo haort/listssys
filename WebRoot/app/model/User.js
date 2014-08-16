@@ -5,5 +5,5 @@ Ext.define('LSYS.model.User', {
         'Ext.data.reader.Json'
     ],
 
-    fields: ['id', 'name','phone', 'addr','acc','area','startdt','enddt']
+    fields: ['id', 'name','phone', 'addr','acc','area','startdt','enddt','state']
 });

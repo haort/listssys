@@ -17,13 +17,17 @@ public class ReportService {
 	@Resource(name="reportDao")
 	private ReportDao reportDao;
 	
-	public Map<String,Object> findReports(int start,int size,String record){
-		 List<Report> list = reportDao.selectReports(start, size, record);
-		 long count = reportDao.countReports(record);
+	public Map<String,Object> findReports(int start,int size,String table){
+		 List<Report> list = reportDao.selectReports(start, size, table);
+		 long count = reportDao.countReports(table);
 		 Map<String,Object> map = new HashMap<String,Object>();  
 	     map.put("users", list);  
 	     map.put("totalCount", count);
 	    
 		return map;
+	}
+	
+	public void updateReports(Report r,String table){
+		 reportDao.updateReports(r, table);
 	}
 }

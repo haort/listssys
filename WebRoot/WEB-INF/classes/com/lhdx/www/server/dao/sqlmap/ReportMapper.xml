@@ -3,7 +3,7 @@
 
 <mapper namespace="com.lhdx.www.server.dao.ReportDao">
 	<select id="selectReports" resultMap="reportMap" parameterType="java.util.HashMap">
-		select id,name,acc,addr,area,phone,startdt,enddt,own from ${table}
+		select id,name,acc,addr,area,phone,startdt,enddt,own,state from ${table}
 		order by id
 		limit #{start},#{size}
 	</select>
@@ -12,6 +12,11 @@
 		select ifnull(count(1),0) from ${table}
 	</select>
 	
+	<update id="updateReportById" parameterType="java.util.HashMap">
+        update ${table} set  state = #{state}
+        where id = #{id}
+    </update>
+    
 	<resultMap type="Report" id="reportMap">
 		<id property="id" column="id" />
 		<result property="name" column="name" />
@@ -22,6 +27,7 @@
 		<result property="startdt" column="startdt" />
 		<result property="enddt" column="enddt" />
 		<result property="own" column="own" />
+		<result property="state" column="state" />
 	</resultMap>
 
 </mapper>

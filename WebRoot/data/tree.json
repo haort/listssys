@@ -5,11 +5,11 @@
             {   id:'ch',
                 text: '201408',
                 children: [
-                    { id: 'report0810', text: 'report0810', leaf: true },
-                    { id: 'report0811', text: 'report0811', leaf: true },
-                    { id: 'report0812', text: 'report0812', leaf: true },
-                    { id: 'report0813', text: 'report0813', leaf: true },
-                    { id: 'report0814', text: 'report0814', leaf: true }
+                    { id: 'report0810', text: '宽带0810', leaf: true },
+                    { id: 'report0811', text: '宽带0811', leaf: true },
+                    { id: 'report0812', text: '宽带0812', leaf: true },
+                    { id: 'report0813', text: '宽带0813', leaf: true },
+                    { id: 'report0814', text: '宽带0814', leaf: true }
                 ]
             }
         ]

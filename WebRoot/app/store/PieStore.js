@@ -6,21 +6,12 @@ Ext.define('LSYS.store.PieStore', {
         'Ext.data.Field'
     ],
     model: 'LSYS.model.PieModel',
-    constructor: function(cfg) {
-        var me = this;
-        cfg = cfg || {};
-        me.callParent([Ext.apply({
-            autoLoad: true,
-            autoSync: true,
-            proxy: {
-                type: 'ajax',
-                url: 'data/pie.json',
-                reader: {
-                    type: 'json',
-                    root: 'pies',
-                }
-            }
-           
-        }, cfg)]);
-    }
+    proxy : {
+		type : 'ajax',
+		url : 'data/pie.json',
+		reader: {
+            type: 'json',
+            root: 'pies',
+        }
+	}
 });

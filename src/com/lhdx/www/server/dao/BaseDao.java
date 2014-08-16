@@ -8,5 +8,4 @@ public class BaseDao {
 
 	@Resource(name="sqlSession")
 	public SqlSessionTemplate sqlSession;
-	
 }

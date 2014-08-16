@@ -4,13 +4,10 @@
     title : '清单',
     store: 'Users',
     columns: [
-        {header: '姓名',  dataIndex: 'name',  flex: 1,editor : {
-        	 xtype : 'combobox',
-        	 editable : false,
-        	 displayField : 'id',
-        	 queryMode : 'local',
-        	 allowBlank : false
-        	 }},
+        {header: '状态',  dataIndex: 'state',  flex: 1,editor : {
+             	 xtype : 'coboview',
+             	 }},
+        {header: '姓名',  dataIndex: 'name',  flex: 1},
         {header: '地址', dataIndex: 'addr', flex: 1},
         {header: '手机', dataIndex: 'phone', flex: 1},
         {header: '接入号', dataIndex: 'acc', flex: 1},

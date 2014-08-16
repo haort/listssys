@@ -1,22 +1,26 @@
+var table;
 Ext.define('LSYS.controller.Users', {
     extend: 'Ext.app.Controller',
 
     stores: [
         'Users@LSYS.store',
         'LSYS.store.MenuStore',
-        'LSYS.store.PieStore'    ],
+        'LSYS.store.PieStore',
+        'LSYS.store.ComboboxStore'],
 
     models: [
         'User@LSYS.model',
         'LSYS.model.MenuModel',
-        'LSYS.model.PieModel'
+        'LSYS.model.PieModel',
+        'LSYS.model.ComboboxModel'
     ],
 
     views: [
         'Edit@LSYS.view.user',
         'List@LSYS.view.user',
         'LSYS.view.Navigation',
-        'LSYS.view.Pie'   ],
+        'LSYS.view.Pie',
+        'LSYS.view.ComboboxView'],
 
     refs: [
         {
@@ -37,12 +41,17 @@ Ext.define('LSYS.controller.Users', {
             ref: 'listpie',
             selector: 'listpie'
         }
+        ,
+        {
+            ref: 'coboview',
+            selector: 'coboview'
+        }
     ],
 
     init: function() {
         this.control({
             'userlist': {
-                itemdblclick: this.editUser
+        	    edit: this.editUser
             },
             'useredit button[action=save]': {
                 click: this.updateUser
@@ -55,15 +64,43 @@ Ext.define('LSYS.controller.Users', {
             },
             'navigation': {
             	itemclick: this.changePage
+           },
+            'coboview': {
+            	itemclick: this.changePage
            }
-            
         });
     },
 
-    editUser: function(grid, record) {
-        var edit = Ext.create('LSYS.view.user.Edit').show();
-        edit.down('form').loadRecord(record);
-    },
+    editUser: function(editor, e) {
+    	var gridStore = e.grid.getStore();
+    	gridStore.setProxy({
+            type: 'ajax',
+            api: {
+                update: '/listssys/json/updateState.json'
+            },
+            reader: {
+                successProperty: 'success'
+            },
+            extraParams:{data:e.record.data,table:table}
+        });
+		gridStore.sync({
+			success: function (op){
+			e.record.commit();
+		}}); 
+		gridStore.setProxy({
+            type: 'ajax',
+            api: {
+                read: '/listssys/json/reportList.json',
+            },
+            reader: {
+                type: 'json',
+                root: 'users',
+                totalProperty: 'totalCount',
+                successProperty: 'success'
+            },
+            extraParams:{table:table}
+        });
+	},
 
     updateUser: function(button) {
         var win    = button.up('window'),
@@ -90,7 +127,7 @@ Ext.define('LSYS.controller.Users', {
     }
     ,
     changePage:function(view, rec, item, index, e){
-    	var params = {record:rec.get("text")};  
+    	table = rec.get("id");
     	var isLeaf = rec.get("leaf");
     	if(isLeaf){
     		var gridStore = this.getUserlist().getStore();
@@ -98,18 +135,22 @@ Ext.define('LSYS.controller.Users', {
                 type: 'ajax',
                 api: {
                     read: '/listssys/json/reportList.json',
-                    update: 'data/updateUsers.json'
                 },
                 reader: {
                     type: 'json',
                     root: 'users',
                     totalProperty: 'totalCount',
                     successProperty: 'success'
-                }
+                },
+                extraParams:{table:table}
             });
-    		Ext.apply(gridStore.proxy.extraParams, params);  
     		gridStore.load();
+    		
+    		var pieStore = this.getListpie().getStore();
+    		pieStore.load();
     	}
     }
+
     
 });
+

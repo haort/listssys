@@ -13,19 +13,28 @@ public class ReportDao extends BaseDao {
 	private static final String NAMESPACE = "com.lhdx.www.server.dao.ReportDao";
 	private static final String SELECTREPORTS = ".selectReports";
 	private static final String COUNTREPORTS = ".countReports";
+	private static final String UPDATEREPORTBYID = ".updateReportById";
 
-	public List<Report> selectReports(int start,int size,String record) {
+	public List<Report> selectReports(int start,int size,String table) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("start", start);
 		map.put("size", size);
-		map.put("table", record);
+		map.put("table", table);
 		return sqlSession.selectList(NAMESPACE + SELECTREPORTS,map);
 	}
 	
-	public long countReports(String record) {
+	public long countReports(String table) {
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("table", record);
+		map.put("table", table);
 		return sqlSession.selectOne(NAMESPACE + COUNTREPORTS,map);
+	}
+	
+	public void updateReports(Report r,String table) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id", r.getId());
+		map.put("state", r.getState());
+		map.put("table", table);
+		sqlSession.update(NAMESPACE + UPDATEREPORTBYID,map);
 	}
 
 }

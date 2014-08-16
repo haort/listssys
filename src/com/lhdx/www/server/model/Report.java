@@ -2,6 +2,7 @@ package com.lhdx.www.server.model;
 
 public class Report {
 	private int id;
+	private String state;
 	private String name;
 	private String addr;
 	private String phone;
@@ -11,6 +12,12 @@ public class Report {
 	private String enddt;
 	private String own;
 	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public String getName() {
 		return name;
 	}
