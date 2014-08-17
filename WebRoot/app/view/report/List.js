@@ -1,8 +1,8 @@
-﻿Ext.define('LSYS.view.user.List' ,{
+﻿Ext.define('LSYS.view.report.List' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.userlist',
     title : '清单',
-    store: 'Users',
+    store: 'LSYS.store.ReportStore',
     columns: [
         {header: '状态',  dataIndex: 'state',  flex: 1,editor : {
              	 xtype : 'coboview',
@@ -16,8 +16,11 @@
         {header: '截止日期', dataIndex: 'enddt', flex: 1}
     ],
     bbar:[
-    {xtype:'pagingtoolbar',store:'Users'}
+    {xtype:'pagingtoolbar',store:'LSYS.store.ReportStore'}
     ],
+    tbar: [{
+        text: 'zhipai'
+    }],
     selModel: {
         selType: 'cellmodel'
     },

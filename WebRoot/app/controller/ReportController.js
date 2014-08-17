@@ -1,23 +1,23 @@
 var table;
-Ext.define('LSYS.controller.Users', {
+Ext.define('LSYS.controller.ReportController', {
     extend: 'Ext.app.Controller',
 
     stores: [
-        'Users@LSYS.store',
+        'LSYS.store.ReportStore',
         'LSYS.store.MenuStore',
         'LSYS.store.PieStore',
         'LSYS.store.ComboboxStore'],
 
     models: [
-        'User@LSYS.model',
+        'LSYS.model.ReportModel',
         'LSYS.model.MenuModel',
         'LSYS.model.PieModel',
         'LSYS.model.ComboboxModel'
     ],
 
     views: [
-        'Edit@LSYS.view.user',
-        'List@LSYS.view.user',
+        'LSYS.view.report.Edit',
+        'LSYS.view.report.List',
         'LSYS.view.Navigation',
         'LSYS.view.Pie',
         'LSYS.view.ComboboxView'],

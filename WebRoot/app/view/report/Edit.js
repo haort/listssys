@@ -1,4 +1,4 @@
-Ext.define('LSYS.view.user.Edit', {
+Ext.define('LSYS.view.report.Edit', {
     extend: 'Ext.window.Window',
     alias : 'widget.useredit',
 

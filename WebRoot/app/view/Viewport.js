@@ -1,7 +1,6 @@
 Ext.define('LSYS.view.Viewport', {
     extend: 'Ext.container.Viewport',
     layout: 'border',
-    requires:['LSYS.view.Pie'],
     items: [
     {
          title:'菜单',

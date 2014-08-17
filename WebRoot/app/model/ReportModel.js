@@ -1,4 +1,4 @@
-Ext.define('LSYS.model.User', {
+Ext.define('LSYS.model.ReportModel', {
     extend: 'Ext.data.Model',
 
     requires: [
