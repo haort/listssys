@@ -21,5 +21,5 @@
     selModel: {
         selType: 'cellmodel'
     },
-    plugins: [Ext.create('Ext.grid.plugin.RowEditing', {clicksToEdit: 1})]
+    plugins: [Ext.create('Ext.grid.plugin.RowEditing',{clicksToEdit: 1,saveBtnText: '保存',cancelBtnText: "取消"})]
 });

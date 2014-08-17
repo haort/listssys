@@ -6,10 +6,10 @@ Ext.define('LSYS.model.PieModel', {
     ],
     fields: [
              {
-                 name: 'name'
+                 name: 'state'
              },
              {
-                 name: 'data1'
+                 name: 'count'
              }
          ]
 });

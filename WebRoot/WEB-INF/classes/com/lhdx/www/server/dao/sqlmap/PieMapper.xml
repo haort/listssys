@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lhdx.www.server.dao.PieDao">
+	<select id="selectPieByTable" resultMap="pieMap"
+		parameterType="java.util.HashMap">
+		select state,count(id) as count from ${table} group by state
+	</select>
+	
+	<resultMap type="Pie" id="pieMap">
+		<result property="state" javaType="java.lang.String" />
+		<result property="count" javaType="java.lang.Integer"/>
+	</resultMap>
+</mapper>

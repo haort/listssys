@@ -25,9 +25,6 @@ Ext.define('LSYS.view.Viewport', {
            layout:'fit',
            title: '统计',
            tbar: [{
-               text: '保存报表',
-               id:'savePie'
-           }, {
                text: '刷新数据',
                id:'reData'
            }],

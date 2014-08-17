@@ -11,9 +11,8 @@ Ext.define('LSYS.view.Pie', {
             theme: 'Base:gradients',
             series: [{
                 type: 'pie',
-                field: 'data1',
+                field: 'count',
                 showInLegend: true,
-                donut: false,
                 tips: {
                   trackMouse: true,
                   width: 100,
@@ -22,9 +21,9 @@ Ext.define('LSYS.view.Pie', {
                     //calculate percentage.
                     var total = 0;
                    Ext.getCmp('piechart').store.each(function(rec) {
-                        total += rec.get('data1');
+                        total += rec.get('count');
                     });
-                    this.setTitle(storeItem.get('name') + ': ' + Math.round(storeItem.get('data1') / total * 100) + '%');
+                    this.setTitle(storeItem.get('state') + ': ' + Math.round(storeItem.get('count') / total * 100) + '%');
                   }
                 },
                 highlight: {
@@ -33,7 +32,7 @@ Ext.define('LSYS.view.Pie', {
                   }
                 },
                 label: {
-                    field: 'name',
+                    field: 'state',
                     display: 'rotate',
                     contrast: true,
                     font: '10px 黑体'

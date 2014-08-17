@@ -26,9 +26,11 @@
     <typeAliases>
      <typeAlias alias="Report"  type="com.lhdx.www.server.model.Report" />
       <typeAlias alias="Tree"  type="com.lhdx.www.server.model.Tree" />
+       <typeAlias alias="Pie"  type="com.lhdx.www.server.model.Pie" />
 	</typeAliases>
     <mappers>
     <mapper resource="com/lhdx/www/server/dao/sqlmap/ReportMapper.xml"/>
      <mapper resource="com/lhdx/www/server/dao/sqlmap/TreeMapper.xml"/>
+       <mapper resource="com/lhdx/www/server/dao/sqlmap/PieMapper.xml"/>
     </mappers>
 </configuration>

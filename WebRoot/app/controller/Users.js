@@ -147,6 +147,14 @@ Ext.define('LSYS.controller.Users', {
     		gridStore.load();
     		
     		var pieStore = this.getListpie().getStore();
+    		pieStore.setProxy ({
+    			type : 'ajax',
+    			url : '/listssys/json/getPie.json',
+    			reader: {
+    	            type: 'json'
+    	        },
+                extraParams:{table:table}
+    		});
     		pieStore.load();
     	}
     }
