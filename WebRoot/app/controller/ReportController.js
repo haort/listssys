@@ -56,9 +56,6 @@ Ext.define('LSYS.controller.ReportController', {
             'useredit button[action=save]': {
                 click: this.updateUser
             },
-            '#savePie': {
-            	 click: this.savePie
-            },
             '#reData': {
             	 click: this.refreshData
             },
@@ -76,7 +73,7 @@ Ext.define('LSYS.controller.ReportController', {
     	gridStore.setProxy({
             type: 'ajax',
             api: {
-                update: '/listssys/json/updateState.json'
+                update: '/listssys/updateState.json'
             },
             reader: {
                 successProperty: 'success'
@@ -90,7 +87,7 @@ Ext.define('LSYS.controller.ReportController', {
 		gridStore.setProxy({
             type: 'ajax',
             api: {
-                read: '/listssys/json/reportList.json',
+                read: '/listssys/reportList.json',
             },
             reader: {
                 type: 'json',
@@ -112,16 +109,6 @@ Ext.define('LSYS.controller.ReportController', {
         win.close();
         this.getUsersStore().sync();
     },
-    savePie:function(){
-    	 Ext.MessageBox.confirm('是否下载', '是否将图标保存为图片?', function(choice){
-             if(choice == 'yes'){
-            	 var listpie = Ext.getCmp('piechart');
-            	 listpie.save({
-                     type: 'image/png'
-                 });
-             }
-         });
-    },
     refreshData:function(){
     	 this.getListpie().getStore().reload();
     }
@@ -134,7 +121,7 @@ Ext.define('LSYS.controller.ReportController', {
         	gridStore.setProxy({
                 type: 'ajax',
                 api: {
-                    read: '/listssys/json/reportList.json',
+                    read: '/listssys/reportList.json',
                 },
                 reader: {
                     type: 'json',
@@ -149,7 +136,7 @@ Ext.define('LSYS.controller.ReportController', {
     		var pieStore = this.getListpie().getStore();
     		pieStore.setProxy ({
     			type : 'ajax',
-    			url : '/listssys/json/getPie.json',
+    			url : '/listssys/getPie.json',
     			reader: {
     	            type: 'json'
     	        },
