@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 	
-	private static final String USERNAME = "zhiyun";
-	private static final String PASSWORD = "123456";
+	private static final String USERNAME = "hao";
+	private static final String PASSWORD = "123";
 	
 	@RequestMapping("/")
 	public String index(){
@@ -22,12 +22,13 @@ public class LoginController {
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ModelAndView login(String username,String password,HttpServletRequest request){
+		System.out.println("hello"+username+password);
 		ModelAndView mv=new ModelAndView("");
 		if( USERNAME.equals(username)&& PASSWORD.equals(password)){
 			request.getSession().setAttribute("user", username);
-			mv.setViewName("redirect:/manager/students");
+			mv.setViewName("index");
 		}else{
-			mv.setViewName("forward:/");
+			mv.setViewName("login");
 			mv.addObject("username",username);
 			mv.addObject("message", "username or password error ");
 		}
@@ -35,11 +36,12 @@ public class LoginController {
 	}
 	
 	
-	@RequestMapping(value="/loginout",method=RequestMethod.POST)
+	@RequestMapping(value="/loginout")
 	public ModelAndView loginOut(HttpServletRequest request){
 		ModelAndView mv=new ModelAndView();
-		mv.setViewName("/");
+		mv.setViewName("login");
 		request.getSession().removeAttribute("user");
+		System.out.println("remove user");
 		return mv;
 	}
 

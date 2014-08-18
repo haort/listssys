@@ -59,6 +59,9 @@ Ext.define('LSYS.controller.ReportController', {
             '#reData': {
             	 click: this.refreshData
             },
+            '#logoutbtn': {
+           	 click: this.logout
+           },
             'navigation': {
             	itemclick: this.changePage
            },
@@ -73,7 +76,7 @@ Ext.define('LSYS.controller.ReportController', {
     	gridStore.setProxy({
             type: 'ajax',
             api: {
-                update: '/listssys/updateState.json'
+                update: '/listssys/service/updateState.json'
             },
             reader: {
                 successProperty: 'success'
@@ -87,7 +90,7 @@ Ext.define('LSYS.controller.ReportController', {
 		gridStore.setProxy({
             type: 'ajax',
             api: {
-                read: '/listssys/reportList.json',
+                read: '/listssys/service/reportList.json',
             },
             reader: {
                 type: 'json',
@@ -121,7 +124,7 @@ Ext.define('LSYS.controller.ReportController', {
         	gridStore.setProxy({
                 type: 'ajax',
                 api: {
-                    read: '/listssys/reportList.json',
+                    read: '/listssys/service/reportList.json',
                 },
                 reader: {
                     type: 'json',
@@ -136,7 +139,7 @@ Ext.define('LSYS.controller.ReportController', {
     		var pieStore = this.getListpie().getStore();
     		pieStore.setProxy ({
     			type : 'ajax',
-    			url : '/listssys/getPie.json',
+    			url : '/listssys/service/getPie.json',
     			reader: {
     	            type: 'json'
     	        },
@@ -144,8 +147,10 @@ Ext.define('LSYS.controller.ReportController', {
     		});
     		pieStore.load();
     	}
+    },
+    logout:function(){
+    	 window.location = "/listssys/loginout";
     }
-
     
 });
 

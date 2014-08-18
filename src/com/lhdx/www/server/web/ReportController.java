@@ -23,6 +23,7 @@ import com.lhdx.www.server.service.ReportService;
 import com.lhdx.www.server.service.TreeService;
 
 @Controller
+@RequestMapping(value = "/service")
 public class ReportController {
 
 	@Resource(name = "reportService")

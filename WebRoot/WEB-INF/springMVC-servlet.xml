@@ -12,7 +12,7 @@
 	<mvc:annotation-driven />
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/manager/**" />
+			<mvc:mapping path="/service/**" />
 			<bean class="com.lhdx.www.server.web.interceptor.ManagerInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

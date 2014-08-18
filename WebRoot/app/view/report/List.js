@@ -18,9 +18,6 @@
     bbar:[
     {xtype:'pagingtoolbar',store:'LSYS.store.ReportStore'}
     ],
-    tbar: [{
-        text: 'zhipai'
-    }],
     selModel: {
         selType: 'cellmodel'
     },

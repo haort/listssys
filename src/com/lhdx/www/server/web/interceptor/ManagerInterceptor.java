@@ -20,14 +20,12 @@ public class ManagerInterceptor implements HandlerInterceptor{
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
 		request.setCharacterEncoding("UTF-8");
-		/*if(request.getSession().getAttribute("user")!=null){
+		if(request.getSession().getAttribute("user")!=null){
 			return true;
 		}else{
 			response.sendRedirect(request.getContextPath()+"/");
 			return false;
-		}*/
-		System.out.println("pre");
-		return true;
+		}
 	}
 
 }
