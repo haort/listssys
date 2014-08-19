@@ -25,7 +25,6 @@ Ext.define('LSYS.view.Viewport', {
       },
       width:250,
       collapsible:true,
-      split:true,
       items:[
        {
         xtype: 'panel',

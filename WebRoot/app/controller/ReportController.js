@@ -16,12 +16,13 @@ Ext.define('LSYS.controller.ReportController', {
     ],
 
     views: [
-        'LSYS.view.report.Edit',
+        'LSYS.view.report.AdminWin',
         'LSYS.view.report.List',
         'LSYS.view.Navigation',
         'LSYS.view.Pie',
         'LSYS.view.ComboboxView',
-        'LSYS.view.DescriptionPanel'],
+        'LSYS.view.DescriptionPanel',
+        'LSYS.view.AdminGrid'],
 
     refs: [
         {
@@ -50,6 +51,10 @@ Ext.define('LSYS.controller.ReportController', {
         {
             ref: 'despanel',
             selector: 'despanel'
+        },
+        {
+            ref: 'adminlist',
+            selector: 'adminlist'
         }
     ],
 
@@ -153,12 +158,12 @@ Ext.define('LSYS.controller.ReportController', {
     		});
     		pieStore.load();
     		//加载描述
-    		alert(rec.get("description"));
+    		this.getDespanel().update(rec.get("description"));;
     		
     	}else{
     		var action  =  rec.get("id");
     		if(action=="ACTION_SEND"){
-    			 var edit = Ext.create('LSYS.view.report.Edit').show();
+    			 var edit = Ext.create('LSYS.view.report.AdminWin').show();
     		}
     	}
     },
