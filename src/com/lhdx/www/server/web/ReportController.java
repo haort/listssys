@@ -1,23 +1,20 @@
 package com.lhdx.www.server.web;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lhdx.www.server.model.Report;
+import com.lhdx.www.server.model.Tree;
+import com.lhdx.www.server.model.User;
 import com.lhdx.www.server.service.PieService;
 import com.lhdx.www.server.service.ReportService;
 import com.lhdx.www.server.service.TreeService;
@@ -51,10 +48,21 @@ public class ReportController {
 		reportService.updateReports(r, table);
 	}
 	
-	@RequestMapping(value = "/getTreeList")
+	@RequestMapping(value = "/getTreeListByList")
 	public @ResponseBody
-	Map getTreeList() {
-		return treeService.findTree();
+	List getTreeListByList(HttpServletRequest request) {
+		List<Tree> list = treeService.findTreeByList();
+		if(request.getSession().getAttribute("user")!=null){
+			User u = (User) request.getSession().getAttribute("user");
+			if(u.getAuthority().equals("admin")){
+				 Tree root = new Tree();
+				 root.setId("ACTION_SEND");
+				 root.setLeaf(false);
+				 root.setText("分配清单");
+				 list.add(root);
+			}
+		}
+		return list;
 	}
 	
 	@RequestMapping(value = "/getPie")

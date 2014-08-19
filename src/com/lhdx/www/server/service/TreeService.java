@@ -1,5 +1,6 @@
 package com.lhdx.www.server.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -18,8 +19,8 @@ public class TreeService {
 	@Resource(name="treeDao")
 	private TreeDao treeDao;
 	
-	public Map<String,Object> findTree(){
-		 List<Tree> list = treeDao.selectTreeNode();
+	public List findTreeByList(){
+		List<Tree> list = treeDao.selectTreeNode();
 		 if(list!=null&&list.size()!=0){
 			 Iterator<Tree> i = list.iterator();
 			 while(i.hasNext()){
@@ -31,10 +32,10 @@ public class TreeService {
 		 Tree root = new Tree();
 		 root.setId("root");
 		 root.setLeaf(false);
-		 root.setText("总清单");
+		 root.setText("外呼清单");
 		 root.setChildren(list);
-		 Map<String,Object> map = new HashMap<String,Object>();  
-	     map.put("children", root);  
-		return map;
+		 List<Tree> resList = new ArrayList<Tree>();
+		 resList.add(root);
+		return resList;
 	}
 }

@@ -117,9 +117,9 @@ Ext.define('LSYS.controller.ReportController', {
     }
     ,
     changePage:function(view, rec, item, index, e){
-    	table = rec.get("id");
     	var isLeaf = rec.get("leaf");
     	if(isLeaf){
+    		table = rec.get("id");
     		var gridStore = this.getUserlist().getStore();
         	gridStore.setProxy({
                 type: 'ajax',
@@ -146,6 +146,11 @@ Ext.define('LSYS.controller.ReportController', {
                 extraParams:{table:table}
     		});
     		pieStore.load();
+    	}else{
+    		var action  =  rec.get("id");
+    		if(action=="ACTION_SEND"){
+    			 var edit = Ext.create('LSYS.view.report.Edit').show();
+    		}
     	}
     },
     logout:function(){

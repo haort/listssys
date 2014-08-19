@@ -8,7 +8,7 @@ Ext.define('LSYS.view.report.Edit', {
     layout: 'fit',
     autoShow: true,
     width: 280,
-
+    modal : true,
     initComponent: function() {
         this.items = [
             {
