@@ -20,7 +20,8 @@ Ext.define('LSYS.controller.ReportController', {
         'LSYS.view.report.List',
         'LSYS.view.Navigation',
         'LSYS.view.Pie',
-        'LSYS.view.ComboboxView'],
+        'LSYS.view.ComboboxView',
+        'LSYS.view.DescriptionPanel'],
 
     refs: [
         {
@@ -45,6 +46,10 @@ Ext.define('LSYS.controller.ReportController', {
         {
             ref: 'coboview',
             selector: 'coboview'
+        },
+        {
+            ref: 'despanel',
+            selector: 'despanel'
         }
     ],
 
@@ -120,6 +125,7 @@ Ext.define('LSYS.controller.ReportController', {
     	var isLeaf = rec.get("leaf");
     	if(isLeaf){
     		table = rec.get("id");
+    		//加载grid
     		var gridStore = this.getUserlist().getStore();
         	gridStore.setProxy({
                 type: 'ajax',
@@ -135,7 +141,7 @@ Ext.define('LSYS.controller.ReportController', {
                 extraParams:{table:table}
             });
     		gridStore.load();
-    		
+    		//加载pie
     		var pieStore = this.getListpie().getStore();
     		pieStore.setProxy ({
     			type : 'ajax',
@@ -146,6 +152,8 @@ Ext.define('LSYS.controller.ReportController', {
                 extraParams:{table:table}
     		});
     		pieStore.load();
+    		//加载描述
+    		
     	}else{
     		var action  =  rec.get("id");
     		if(action=="ACTION_SEND"){
@@ -154,7 +162,12 @@ Ext.define('LSYS.controller.ReportController', {
     	}
     },
     logout:function(){
-    	 window.location = "/listssys/loginout";
+    	 Ext.Msg.confirm("请确认", "是否真的要退出？", function(button, text) { 
+             if (button == "yes") { 
+            	 window.location = "/listssys/loginout";
+             }
+    	 });
+    	 
     }
     
 });

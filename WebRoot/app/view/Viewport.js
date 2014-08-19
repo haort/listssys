@@ -11,28 +11,36 @@ Ext.define('LSYS.view.Viewport', {
 	 width:225,
 	 xtype: 'navigation'
     },{
-	  region:'center',
-         xtype: 'panel',
-           margins: '5 0 5 5',
-         layout:{
-           type:'vbox',
-           align:'stretch'
-         },
-         items:[
-          {
-           xtype: 'panel',
-           layout:'fit',
-           title: '统计',
-           tbar: [{
-               text: '刷新数据',
-               id:'reData'
-           }],
-           items:[{ xtype: 'listpie'}],
-           flex:2
-           },
-          { 
-           xtype: 'userlist',
-           flex:4
-         }]
-    }]
+	     region:'center',
+         xtype: 'userlist',
+           margins: '5 0 5 5'
+    },{
+  	  region:'east',
+      xtype: 'panel',
+      title:'统计及描述',
+      margins: '5 5 5 5',
+      layout:{
+        type:'vbox',
+        align:'stretch'
+      },
+      width:250,
+      collapsible:true,
+      split:true,
+      items:[
+       {
+        xtype: 'panel',
+        layout:'fit',
+        title: '统计',
+        tbar: [{
+            text: '刷新数据',
+            id:'reData'
+        }],
+        items:[{ xtype: 'listpie'}],
+        flex:2
+        },
+       { 
+        xtype: 'despanel',
+        flex:4
+      }]
+ }]
 });
