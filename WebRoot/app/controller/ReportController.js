@@ -153,6 +153,7 @@ Ext.define('LSYS.controller.ReportController', {
     		});
     		pieStore.load();
     		//加载描述
+    		alert(rec.get("description"));
     		
     	}else{
     		var action  =  rec.get("id");

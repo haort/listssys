@@ -3,11 +3,11 @@
 
 <mapper namespace="com.lhdx.www.server.dao.TreeDao">
 	<select id="selectTreeNode" resultMap="treeMap">
-		select nid,id,text,leaf from reporttable where leaf = 0
+		select nid,id,text,leaf,description from reporttable where leaf = 0
 	</select>
     
     <select id="selectTreeNodeByParentId" resultMap="treeMap" parameterType="java.util.HashMap">
-		select nid,id,text,leaf from reporttable where parentid = #{nid}
+		select nid,id,text,leaf,description from reporttable where parentid = #{nid}
 	</select>
     
 	<resultMap type="Tree" id="treeMap">
@@ -15,6 +15,7 @@
 		<result property="id" column="id" />
 		<result property="text" column="text" />
 		<result property="leaf" column="leaf" />
+		<result property="description" column="description" />
 	</resultMap>
 
 </mapper>

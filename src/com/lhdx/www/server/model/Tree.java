@@ -8,6 +8,7 @@ public class Tree {
 	private String id;
 	private String text;
 	private boolean leaf;
+	private String description;
 	private List<Tree> children = new ArrayList<Tree>();
 	public String getId() {
 		return id;
@@ -38,5 +39,11 @@ public class Tree {
 	}
 	public void setNid(int nid) {
 		this.nid = nid;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

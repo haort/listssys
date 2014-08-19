@@ -3,6 +3,7 @@ Ext.define('LSYS.model.MenuModel', {
     fields: [
      {name:'id',type:'string'},
      {name:'text',type:'string'},
-     {name:'leaf',type:'boolean',defaultValue:true}
+     {name:'leaf',type:'boolean',defaultValue:true},
+     {name:'description',type:'string'}
     ]
 });
