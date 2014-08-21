@@ -1,4 +1,4 @@
-Ext.define('LSYS.view.AdminGrid' ,{
+Ext.define('LSYS.view.admin.AdminGrid' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.adminlist',
     title : '分配清单',
@@ -18,6 +18,7 @@ Ext.define('LSYS.view.AdminGrid' ,{
     {xtype:'pagingtoolbar',store:'LSYS.store.ReportStore'}
     ],
     tbar: [{
-        text: '分配'
+        text: '分配',
+        id:'sendList'
     }]
 });

@@ -7,7 +7,11 @@
 		select uid,username,password,authority,departMent,area
 		from user where username = #{userName} and password = #{pwd}
 	</select>
-
+    
+    <select id="selectAdminTreeNodeByParentId" resultMap="adminTreeMap" parameterType="java.util.HashMap">
+		select uid as id,username as text from user where parentid = #{uid}
+	</select>
+	
 	<resultMap type="User" id="userMap">
 		<id property="uid" column="uid" />
 		<result property="userName" column="username" />
@@ -17,4 +21,8 @@
 		<result property="area" column="area" />
 	</resultMap>
 
+    <resultMap type="AdminTree" id="adminTreeMap">
+		<result property="id" column="java.lang.Integer" />
+		<result property="text" column="java.lang.String" />
+	</resultMap>
 </mapper>

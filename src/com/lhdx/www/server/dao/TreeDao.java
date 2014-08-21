@@ -13,6 +13,7 @@ public class TreeDao extends BaseDao {
 	private static final String NAMESPACE = "com.lhdx.www.server.dao.TreeDao";
 	private static final String SELECTTREENODE = ".selectTreeNode";
 	private static final String SELECTTREENODEBYPARENTID = ".selectTreeNodeByParentId";
+
 	
 	public List<Tree> selectTreeNode() {
 		return sqlSession.selectList(NAMESPACE + SELECTTREENODE);
@@ -23,4 +24,5 @@ public class TreeDao extends BaseDao {
 		map.put("nid", nid);
 		return sqlSession.selectList(NAMESPACE + SELECTTREENODEBYPARENTID,map);
 	}
+
 }

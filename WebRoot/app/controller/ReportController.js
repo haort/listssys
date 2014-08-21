@@ -6,23 +6,26 @@ Ext.define('LSYS.controller.ReportController', {
         'LSYS.store.ReportStore',
         'LSYS.store.MenuStore',
         'LSYS.store.PieStore',
-        'LSYS.store.ComboboxStore'],
+        'LSYS.store.ComboboxStore',
+        'LSYS.store.AdminTreeStore'],
 
     models: [
         'LSYS.model.ReportModel',
         'LSYS.model.MenuModel',
         'LSYS.model.PieModel',
-        'LSYS.model.ComboboxModel'
+        'LSYS.model.ComboboxModel',
+        'LSYS.model.AdminTreeModel'
     ],
 
     views: [
-        'LSYS.view.report.AdminWin',
+        'LSYS.view.admin.AdminWin',
+        'LSYS.view.admin.AdminTree',
         'LSYS.view.report.List',
         'LSYS.view.Navigation',
         'LSYS.view.Pie',
         'LSYS.view.ComboboxView',
         'LSYS.view.DescriptionPanel',
-        'LSYS.view.AdminGrid'],
+        'LSYS.view.admin.AdminGrid'],
 
     refs: [
         {
@@ -64,19 +67,30 @@ Ext.define('LSYS.controller.ReportController', {
         	    edit: this.editUser
             },
             'useredit button[action=save]': {
-                click: this.updateUser
+                 click: this.updateUser
             },
             '#reData': {
             	 click: this.refreshData
             },
             '#logoutbtn': {
-           	 click: this.logout
+           	     click: this.logout
            },
             'navigation': {
             	itemclick: this.changePage
            },
             'coboview': {
             	itemclick: this.changePage
+           },
+           '#sendList':{
+        	   click:this.sendListShow
+           }
+           ,
+           '#adminOkBtn':{
+        	   click:this.sendList
+           }
+           ,
+           '#adminCancelBtn':{
+        	   click:this.sendListCancel
            }
         });
     },
@@ -163,7 +177,7 @@ Ext.define('LSYS.controller.ReportController', {
     	}else{
     		var action  =  rec.get("id");
     		if(action=="ACTION_SEND"){
-    			 var edit = Ext.create('LSYS.view.report.AdminWin').show();
+    			 var edit = Ext.create('LSYS.view.admin.AdminWin').show();
     		}
     	}
     },
@@ -174,6 +188,34 @@ Ext.define('LSYS.controller.ReportController', {
              }
     	 });
     	 
+    },
+    sendListShow:function(){
+    	var adminList = this.getAdminlist();
+    	var records = adminList.getSelectionModel().getSelection();
+    	if(records.length>0){
+    		 var edit = Ext.create('LSYS.view.admin.AdminTree').show();
+    	}else{
+        	 Ext.Msg.alert("提示", "请选中至少一条记录指派");
+        }
+    	
+    	 
+    }
+    ,
+    sendList:function(button){
+    	var adminList = this.getAdminlist();
+    	var records = adminList.getSelectionModel().getSelection();
+    	var store = adminList.getStore();
+        var msg = []; 
+        Ext.each(records, function(record) {
+        	 msg.push('选中第' + record.get("id") + '行的Date列:' + record.get("name"));
+        	 store.remove(record);
+        	})
+        alert(msg.join('\n'));
+        button.up('window').close();
+    },
+    sendListCancel:function(button){
+    	var win = button.up('window');
+    	win.close();
     }
     
 });

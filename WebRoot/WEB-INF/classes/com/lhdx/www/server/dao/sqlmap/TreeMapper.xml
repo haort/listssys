@@ -9,7 +9,7 @@
     <select id="selectTreeNodeByParentId" resultMap="treeMap" parameterType="java.util.HashMap">
 		select nid,id,text,leaf,description from reporttable where parentid = #{nid}
 	</select>
-    
+	
 	<resultMap type="Tree" id="treeMap">
 		<id property="nid" column="nid" />
 		<result property="id" column="id" />

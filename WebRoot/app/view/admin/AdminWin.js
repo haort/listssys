@@ -1,4 +1,4 @@
-Ext.define('LSYS.view.report.AdminWin', {
+Ext.define('LSYS.view.admin.AdminWin', {
     extend: 'Ext.window.Window',
     alias : 'widget.adminwin',
     layout: 'fit',
