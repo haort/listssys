@@ -17,9 +17,9 @@ public class ReportService {
 	@Resource(name="reportDao")
 	private ReportDao reportDao;
 	
-	public Map<String,Object> findReports(int start,int size,String table){
-		 List<Report> list = reportDao.selectReports(start, size, table);
-		 long count = reportDao.countReports(table);
+	public Map<String,Object> findReports(int start,int size,String table,String admin){
+		 List<Report> list = reportDao.selectReports(start, size, table,admin);
+		 long count = reportDao.countReports(table,admin);
 		 Map<String,Object> map = new HashMap<String,Object>();  
 	     map.put("users", list);  
 	     map.put("totalCount", count);

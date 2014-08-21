@@ -7,7 +7,8 @@ Ext.define('LSYS.controller.ReportController', {
         'LSYS.store.MenuStore',
         'LSYS.store.PieStore',
         'LSYS.store.ComboboxStore',
-        'LSYS.store.AdminTreeStore'],
+        'LSYS.store.AdminTreeStore',
+        'LSYS.store.AdminGridStore'],
 
     models: [
         'LSYS.model.ReportModel',
@@ -58,6 +59,10 @@ Ext.define('LSYS.controller.ReportController', {
         {
             ref: 'adminlist',
             selector: 'adminlist'
+        },
+        {
+            ref: 'admintree',
+            selector: 'admintree'
         }
     ],
 
@@ -177,7 +182,13 @@ Ext.define('LSYS.controller.ReportController', {
     	}else{
     		var action  =  rec.get("id");
     		if(action=="ACTION_SEND"){
-    			 var edit = Ext.create('LSYS.view.admin.AdminWin').show();
+    			 var edit = Ext.create('LSYS.view.admin.AdminWin')
+    			 var adminList = this.getAdminlist();
+    			 var store = adminList.getStore();
+    			 Ext.apply(store.proxy.extraParams,{table:table});
+    			 store.load();
+    			 edit.show();
+    			 
     		}
     	}
     },
@@ -202,16 +213,34 @@ Ext.define('LSYS.controller.ReportController', {
     }
     ,
     sendList:function(button){
-    	var adminList = this.getAdminlist();
-    	var records = adminList.getSelectionModel().getSelection();
-    	var store = adminList.getStore();
-        var msg = []; 
-        Ext.each(records, function(record) {
-        	 msg.push('选中第' + record.get("id") + '行的Date列:' + record.get("name"));
-        	 store.remove(record);
-        	})
-        alert(msg.join('\n'));
-        button.up('window').close();
+        var adminTree =  this.getAdmintree().down('treepanel');
+        var treeNode = adminTree.getSelectionModel().getLastSelected();
+        if(treeNode!=null){
+        	var adminList = this.getAdminlist();
+        	var records = adminList.getSelectionModel().getSelection();
+        	var store = adminList.getStore();
+        	var recordids = [];
+        	Ext.each(records,function(record){
+        		recordids.push(record.get("id"));
+        	});
+        	Ext.Ajax.request({
+                url: '/listssys/service/updateOwner.json',
+                params: {recordids: recordids, userid: treeNode.get("id"),table:table },
+                method: 'Post',
+                success: function (response, options) {
+                    Ext.MessageBox.alert('成功', '从服务端获取结果: ' + response.responseText);
+                	store.remove(records);
+                    store.load();
+                    button.up('window').close();
+                },
+                failure: function (response, options) {
+                    Ext.MessageBox.alert('失败', '请求超时或网络故障,错误编号：' + response.status);
+                }
+            });
+        }else{
+        	Ext.Msg.alert("提示", "请选择一个指派对象");
+        }
+        	
     },
     sendListCancel:function(button){
     	var win = button.up('window');

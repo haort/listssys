@@ -38,7 +38,16 @@ public class ReportController {
 			@RequestParam("start") int start,
 			@RequestParam("limit") int size,
 			@RequestParam("table") String table) {
-		return reportService.findReports(start, size, table);
+		return reportService.findReports(start, size, table,null);
+	}
+	
+	@RequestMapping(value = "/adminReportList")
+	public @ResponseBody
+	Map getAdminReports(
+			@RequestParam("start") int start,
+			@RequestParam("limit") int size,
+			@RequestParam("table") String table) {
+		return reportService.findReports(start, size, table,"admin");
 	}
 	
 	@RequestMapping(value = "/updateState")
@@ -69,5 +78,15 @@ public class ReportController {
 	public @ResponseBody
 	List getPie(@RequestParam("table") String table) {
 		return pieService.findPie(table);
+	}
+	
+	@RequestMapping(value = "/updateOwner")
+	public @ResponseBody
+	String updateOwner(
+			@RequestParam("userid") int id,
+			@RequestParam("recordids") String[] ids,
+			@RequestParam("table") String table) {
+		System.out.println(id+"-"+ids+"-"+table);
+		return "Success";
 	}
 }

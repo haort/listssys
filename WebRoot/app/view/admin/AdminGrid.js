@@ -2,7 +2,7 @@ Ext.define('LSYS.view.admin.AdminGrid' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.adminlist',
     title : '分配清单',
-    store: 'LSYS.store.ReportStore',
+    store: 'LSYS.store.AdminGridStore',
     columns: [
         {header: '状态',  dataIndex: 'state',  flex: 1},
         {header: '姓名',  dataIndex: 'name',  flex: 1},
@@ -15,7 +15,7 @@ Ext.define('LSYS.view.admin.AdminGrid' ,{
     ],
     selType: 'checkboxmodel',
     bbar:[
-    {xtype:'pagingtoolbar',store:'LSYS.store.ReportStore'}
+    {xtype:'pagingtoolbar',store:'LSYS.store.AdminGridStore'}
     ],
     tbar: [{
         text: '分配',
