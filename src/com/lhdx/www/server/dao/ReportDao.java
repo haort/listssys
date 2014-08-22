@@ -1,9 +1,11 @@
 package com.lhdx.www.server.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
 import com.lhdx.www.server.model.Report;
@@ -14,6 +16,7 @@ public class ReportDao extends BaseDao {
 	private static final String SELECTREPORTS = ".selectReports";
 	private static final String COUNTREPORTS = ".countReports";
 	private static final String UPDATEREPORTBYID = ".updateReportById";
+	private static final String BATCHUPDATEREPORTWITHMAP =".batchUpdateReportWithMap";
 
 	public List<Report> selectReports(int start,int size,String table,String admin) {
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -38,5 +41,14 @@ public class ReportDao extends BaseDao {
 		map.put("table", table);
 		sqlSession.update(NAMESPACE + UPDATEREPORTBYID,map);
 	}
+	
+	public void batchUpdateStudentWithMap(String[] ids,String table,int uid){  
+	    Map<String,Object> map = new HashMap<String,Object>();  
+	    map.put("idList", ids);  
+	    map.put("table", table);  
+	    map.put("uid", uid);
+	    sqlSession.insert(NAMESPACE+BATCHUPDATEREPORTWITHMAP,map);  
+	}  
+
 
 }

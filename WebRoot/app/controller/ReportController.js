@@ -228,7 +228,7 @@ Ext.define('LSYS.controller.ReportController', {
                 params: {recordids: recordids, userid: treeNode.get("id"),table:table },
                 method: 'Post',
                 success: function (response, options) {
-                    Ext.MessageBox.alert('成功', '从服务端获取结果: ' + response.responseText);
+                    Ext.MessageBox.alert('成功', '分配成功！');
                 	store.remove(records);
                     store.load();
                     button.up('window').close();

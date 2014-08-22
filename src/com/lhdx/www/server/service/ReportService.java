@@ -30,4 +30,8 @@ public class ReportService {
 	public void updateReports(Report r,String table){
 		 reportDao.updateReports(r, table);
 	}
+	
+	public void updateReportsOwn(String[] ids,String table,int uid){
+		 reportDao.batchUpdateStudentWithMap(ids, table, uid);
+	}
 }

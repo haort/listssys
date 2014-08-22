@@ -86,7 +86,7 @@ public class ReportController {
 			@RequestParam("userid") int id,
 			@RequestParam("recordids") String[] ids,
 			@RequestParam("table") String table) {
-		System.out.println(id+"-"+ids+"-"+table);
+		reportService.updateReportsOwn(ids, table, id);
 		return "Success";
 	}
 }

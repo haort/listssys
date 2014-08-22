@@ -29,6 +29,13 @@
 		where id = #{id}
     </update>
 
+	<update id="batchUpdateReportWithMap" parameterType="java.util.Map" >  
+	    UPDATE ${table} SET own = #{uid} WHERE id IN   
+	    <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">   
+	        #{item}   
+	    </foreach>  
+	</update>  
+
 	<resultMap type="Report" id="reportMap">
 		<id property="id" column="id" />
 		<result property="name" column="name" />
