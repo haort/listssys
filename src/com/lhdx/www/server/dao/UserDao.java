@@ -13,6 +13,7 @@ import com.lhdx.www.server.model.User;
 public class UserDao extends BaseDao {
 	private static final String NAMESPACE = "com.lhdx.www.server.dao.UserDao";
 	private static final String SELECTUSERBYNAMEANDPWD = ".selectUserByNameAndPwd";
+	private static final String SELECTUSERBYID = ".selectUserById";
 	private static final String SELECTADMINTREENODEBYPARENTID = ".selectAdminTreeNodeByParentId";
 	
 	public User selectuUserByNameAndPwd(String userName,String pwd) {
@@ -20,6 +21,12 @@ public class UserDao extends BaseDao {
 		map.put("userName", userName);
 		map.put("pwd", pwd);
 		return sqlSession.selectOne(NAMESPACE + SELECTUSERBYNAMEANDPWD,map);
+	}
+	
+	public User selectuUserById(int uid) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("uid", uid);
+		return sqlSession.selectOne(NAMESPACE + SELECTUSERBYID,map);
 	}
 	
 	

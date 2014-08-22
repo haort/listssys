@@ -38,8 +38,13 @@ public class ReportController {
 	Map getReports(
 			@RequestParam("start") int start,
 			@RequestParam("limit") int size,
-			@RequestParam("table") String table) {
-		return reportService.findReports(start, size, table,null,-1);
+			@RequestParam("table") String table,HttpServletRequest request) {
+		Map<String,Object> map = new HashMap<String,Object>();  
+		User u = getUser(request);
+		if(u!=null){
+			map = reportService.findReports(start, size, table,u,null);
+		}
+		return map;
 	}
 	
 	@RequestMapping(value = "/adminReportList")
@@ -51,9 +56,7 @@ public class ReportController {
 		Map<String,Object> map = new HashMap<String,Object>();  
 		User u = getUser(request);
 		if(u!=null){
-			if(u.getAuthority().equals("admin")){
-				map=reportService.findReports(start, size, table,"admin",u.getDeep());
-			}
+				map=reportService.findReports(start, size, table,u,"SENDLIST");
 		}
 		return map;
 		
@@ -98,7 +101,7 @@ public class ReportController {
 		User u = getUser(request);
 		if(u!=null){
 			if(u.getAuthority().equals("admin")){
-				reportService.updateReportsOwn(ids, table, id,u.getDeep()+1);
+				reportService.updateReportsOwn(ids, table, id);
 			}
 		}
 		

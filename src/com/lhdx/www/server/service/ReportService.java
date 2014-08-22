@@ -9,17 +9,21 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.lhdx.www.server.dao.ReportDao;
+import com.lhdx.www.server.dao.UserDao;
 import com.lhdx.www.server.model.Report;
+import com.lhdx.www.server.model.User;
 
 
 @Service("reportService")
 public class ReportService {
 	@Resource(name="reportDao")
 	private ReportDao reportDao;
+	@Resource(name="userDao")
+	private UserDao userDao;
 	
-	public Map<String,Object> findReports(int start,int size,String table,String admin,int deep){
-		 List<Report> list = reportDao.selectReports(start, size, table,admin,deep);
-		 long count = reportDao.countReports(table,admin,deep);
+	public Map<String,Object> findReports(int start,int size,String table,User user,String isSend){
+		 List<Report> list = reportDao.selectReports(start, size, table,user,isSend);
+		 long count = reportDao.countReports(table,user,isSend);
 		 Map<String,Object> map = new HashMap<String,Object>();  
 	     map.put("users", list);  
 	     map.put("totalCount", count);
@@ -31,7 +35,8 @@ public class ReportService {
 		 reportDao.updateReports(r, table);
 	}
 	
-	public void updateReportsOwn(String[] ids,String table,int uid,int deep){
-		 reportDao.batchUpdateStudentWithMap(ids, table, uid,deep);
+	public void updateReportsOwn(String[] ids,String table,int uid){
+		 User u = userDao.selectuUserById(uid);
+		 reportDao.batchUpdateStudentWithMap(ids, table,u);
 	}
 }

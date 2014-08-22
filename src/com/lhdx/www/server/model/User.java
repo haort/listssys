@@ -9,6 +9,7 @@ public class User implements java.io.Serializable{
 	private String departMent;
 	private String area;
 	private int deep;
+	private String chname;
 	public String getUserName() {
 		return userName;
 	}
@@ -50,6 +51,12 @@ public class User implements java.io.Serializable{
 	}
 	public void setDeep(int deep) {
 		this.deep = deep;
+	}
+	public String getChname() {
+		return chname;
+	}
+	public void setChname(String chname) {
+		this.chname = chname;
 	}
 	
 }

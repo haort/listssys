@@ -6,8 +6,14 @@
 		select id,name,acc,addr,area,phone,startdt,enddt,own,state from
 		${table}
 		<where>
-			<if test="admin !=null">
-				 deep = #{deep}
+			<if test="isSend !=null and isSend !=''">
+				 deep = #{user.deep}
+	       </if>
+	       <if test="user.area !=null and user.area !=''">
+				 and area = #{user.area}
+	       </if>
+	        <if test="user.chname !=null and user.chname !=''">
+				 and chname = #{user.chname}
 	       </if>
 		</where>
 		order by id
@@ -18,8 +24,14 @@
 		parameterType="java.util.HashMap">
 		select ifnull(count(1),0) from ${table}
 		<where>
-			<if test="admin !=null">
-				 deep = #{deep}
+			<if test="isSend !=null and isSend !=''">
+				 deep = #{user.deep}
+	       </if>
+	       <if test="user.area !=null and user.area !=''">
+				 and area = #{user.area}
+	       </if>
+	        <if test="user.chname !=null and user.chname !=''">
+				 and chname = #{user.chname}
 	       </if>
 		</where>
 	</select>
@@ -30,7 +42,19 @@
     </update>
 
 	<update id="batchUpdateReportWithMap" parameterType="java.util.Map" >  
-	    UPDATE ${table} SET own = #{uid},deep =#{deep} WHERE id IN   
+	    UPDATE ${table} 
+	     <set>   
+        <if test="user.uid!=null and user.uid!='' ">   
+            own = #{user.uid}, 
+        </if>   
+        <if test="user.deep!=null and user.deep!='' ">   
+            deep =#{user.deep},    
+        </if>   
+        <if test="user.chname!=null and user.chname!=''">     
+            chname=#{user.chname}   
+        </if>   
+    </set>   
+	    WHERE id IN   
 	    <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">   
 	        #{item}   
 	    </foreach>  

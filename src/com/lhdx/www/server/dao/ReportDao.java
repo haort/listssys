@@ -1,14 +1,13 @@
 package com.lhdx.www.server.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Component;
 
 import com.lhdx.www.server.model.Report;
+import com.lhdx.www.server.model.User;
 
 @Component("reportDao")
 public class ReportDao extends BaseDao {
@@ -18,21 +17,21 @@ public class ReportDao extends BaseDao {
 	private static final String UPDATEREPORTBYID = ".updateReportById";
 	private static final String BATCHUPDATEREPORTWITHMAP =".batchUpdateReportWithMap";
 
-	public List<Report> selectReports(int start,int size,String table,String admin,int deep) {
+	public List<Report> selectReports(int start,int size,String table,User user,String isSend) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("start", start);
 		map.put("size", size);
 		map.put("table", table);
-		map.put("admin", admin);
-		map.put("deep", deep);
+		map.put("user", user);
+		map.put("isSend", isSend);
 		return sqlSession.selectList(NAMESPACE + SELECTREPORTS,map);
 	}
 	
-	public long countReports(String table,String admin,int deep) {
+	public long countReports(String table,User user,String isSend) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("table", table);
-		map.put("admin", admin);
-		map.put("deep", deep);
+		map.put("user", user);
+		map.put("isSend", isSend);
 		return sqlSession.selectOne(NAMESPACE + COUNTREPORTS,map);
 	}
 	
@@ -44,12 +43,11 @@ public class ReportDao extends BaseDao {
 		sqlSession.update(NAMESPACE + UPDATEREPORTBYID,map);
 	}
 	
-	public void batchUpdateStudentWithMap(String[] ids,String table,int uid,int deep){  
+	public void batchUpdateStudentWithMap(String[] ids,String table,User user){  
 	    Map<String,Object> map = new HashMap<String,Object>();  
 	    map.put("idList", ids);  
 	    map.put("table", table);  
-	    map.put("uid", uid);
-	    map.put("deep", deep);
+	    map.put("user", user);
 	    sqlSession.insert(NAMESPACE+BATCHUPDATEREPORTWITHMAP,map);  
 	}  
 
