@@ -17,9 +17,9 @@ public class ReportService {
 	@Resource(name="reportDao")
 	private ReportDao reportDao;
 	
-	public Map<String,Object> findReports(int start,int size,String table,String admin){
-		 List<Report> list = reportDao.selectReports(start, size, table,admin);
-		 long count = reportDao.countReports(table,admin);
+	public Map<String,Object> findReports(int start,int size,String table,String admin,int deep){
+		 List<Report> list = reportDao.selectReports(start, size, table,admin,deep);
+		 long count = reportDao.countReports(table,admin,deep);
 		 Map<String,Object> map = new HashMap<String,Object>();  
 	     map.put("users", list);  
 	     map.put("totalCount", count);
@@ -31,7 +31,7 @@ public class ReportService {
 		 reportDao.updateReports(r, table);
 	}
 	
-	public void updateReportsOwn(String[] ids,String table,int uid){
-		 reportDao.batchUpdateStudentWithMap(ids, table, uid);
+	public void updateReportsOwn(String[] ids,String table,int uid,int deep){
+		 reportDao.batchUpdateStudentWithMap(ids, table, uid,deep);
 	}
 }

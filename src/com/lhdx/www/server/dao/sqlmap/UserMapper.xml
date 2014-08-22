@@ -4,7 +4,7 @@
 <mapper namespace="com.lhdx.www.server.dao.UserDao">
 	<select id="selectUserByNameAndPwd" resultMap="userMap"
 		parameterType="java.util.HashMap">
-		select uid,username,password,authority,departMent,area
+		select uid,username,password,authority,departMent,area,deep
 		from user where username = #{userName} and password = #{pwd}
 	</select>
     
@@ -19,6 +19,7 @@
 		<result property="authority" column="authority" />
 		<result property="departMent" column="department" />
 		<result property="area" column="area" />
+		<result property="deep" column="deep" />
 	</resultMap>
 
     <resultMap type="AdminTree" id="adminTreeMap">

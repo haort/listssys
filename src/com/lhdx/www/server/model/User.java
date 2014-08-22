@@ -8,6 +8,7 @@ public class User implements java.io.Serializable{
 	private String authority;
 	private String departMent;
 	private String area;
+	private int deep;
 	public String getUserName() {
 		return userName;
 	}
@@ -43,6 +44,12 @@ public class User implements java.io.Serializable{
 	}
 	public void setArea(String area) {
 		this.area = area;
+	}
+	public int getDeep() {
+		return deep;
+	}
+	public void setDeep(int deep) {
+		this.deep = deep;
 	}
 	
 }

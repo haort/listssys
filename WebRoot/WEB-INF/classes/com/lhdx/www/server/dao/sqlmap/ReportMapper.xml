@@ -7,7 +7,7 @@
 		${table}
 		<where>
 			<if test="admin !=null">
-				own is null
+				 deep = #{deep}
 	       </if>
 		</where>
 		order by id
@@ -19,7 +19,7 @@
 		select ifnull(count(1),0) from ${table}
 		<where>
 			<if test="admin !=null">
-				own is null
+				 deep = #{deep}
 	       </if>
 		</where>
 	</select>
@@ -30,11 +30,11 @@
     </update>
 
 	<update id="batchUpdateReportWithMap" parameterType="java.util.Map" >  
-	    UPDATE ${table} SET own = #{uid} WHERE id IN   
+	    UPDATE ${table} SET own = #{uid},deep =#{deep} WHERE id IN   
 	    <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">   
 	        #{item}   
 	    </foreach>  
-	</update>  
+	</update> 
 
 	<resultMap type="Report" id="reportMap">
 		<id property="id" column="id" />

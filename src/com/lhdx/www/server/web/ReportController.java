@@ -1,5 +1,6 @@
 package com.lhdx.www.server.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class ReportController {
 			@RequestParam("start") int start,
 			@RequestParam("limit") int size,
 			@RequestParam("table") String table) {
-		return reportService.findReports(start, size, table,null);
+		return reportService.findReports(start, size, table,null,-1);
 	}
 	
 	@RequestMapping(value = "/adminReportList")
@@ -46,8 +47,16 @@ public class ReportController {
 	Map getAdminReports(
 			@RequestParam("start") int start,
 			@RequestParam("limit") int size,
-			@RequestParam("table") String table) {
-		return reportService.findReports(start, size, table,"admin");
+			@RequestParam("table") String table,HttpServletRequest request) {
+		Map<String,Object> map = new HashMap<String,Object>();  
+		User u = getUser(request);
+		if(u!=null){
+			if(u.getAuthority().equals("admin")){
+				map=reportService.findReports(start, size, table,"admin",u.getDeep());
+			}
+		}
+		return map;
+		
 	}
 	
 	@RequestMapping(value = "/updateState")
@@ -60,9 +69,9 @@ public class ReportController {
 	@RequestMapping(value = "/getTreeListByList")
 	public @ResponseBody
 	List getTreeListByList(HttpServletRequest request) {
+		User u = getUser(request);
 		List<Tree> list = treeService.findTreeByList();
-		if(request.getSession().getAttribute("user")!=null){
-			User u = (User) request.getSession().getAttribute("user");
+		if(u!=null){
 			if(u.getAuthority().equals("admin")){
 				 Tree root = new Tree();
 				 root.setId("ACTION_SEND");
@@ -85,8 +94,22 @@ public class ReportController {
 	String updateOwner(
 			@RequestParam("userid") int id,
 			@RequestParam("recordids") String[] ids,
-			@RequestParam("table") String table) {
-		reportService.updateReportsOwn(ids, table, id);
+			@RequestParam("table") String table,HttpServletRequest request) {
+		User u = getUser(request);
+		if(u!=null){
+			if(u.getAuthority().equals("admin")){
+				reportService.updateReportsOwn(ids, table, id,u.getDeep()+1);
+			}
+		}
+		
 		return "Success";
+	}
+	
+	private User getUser(HttpServletRequest request){
+		if(request.getSession().getAttribute("user")!=null){
+			User u = (User) request.getSession().getAttribute("user");
+			return u;
+		}
+		else return null;
 	}
 }

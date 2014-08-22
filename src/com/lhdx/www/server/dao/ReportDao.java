@@ -18,19 +18,21 @@ public class ReportDao extends BaseDao {
 	private static final String UPDATEREPORTBYID = ".updateReportById";
 	private static final String BATCHUPDATEREPORTWITHMAP =".batchUpdateReportWithMap";
 
-	public List<Report> selectReports(int start,int size,String table,String admin) {
+	public List<Report> selectReports(int start,int size,String table,String admin,int deep) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("start", start);
 		map.put("size", size);
 		map.put("table", table);
 		map.put("admin", admin);
+		map.put("deep", deep);
 		return sqlSession.selectList(NAMESPACE + SELECTREPORTS,map);
 	}
 	
-	public long countReports(String table,String admin) {
+	public long countReports(String table,String admin,int deep) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("table", table);
 		map.put("admin", admin);
+		map.put("deep", deep);
 		return sqlSession.selectOne(NAMESPACE + COUNTREPORTS,map);
 	}
 	
@@ -42,11 +44,12 @@ public class ReportDao extends BaseDao {
 		sqlSession.update(NAMESPACE + UPDATEREPORTBYID,map);
 	}
 	
-	public void batchUpdateStudentWithMap(String[] ids,String table,int uid){  
+	public void batchUpdateStudentWithMap(String[] ids,String table,int uid,int deep){  
 	    Map<String,Object> map = new HashMap<String,Object>();  
 	    map.put("idList", ids);  
 	    map.put("table", table);  
 	    map.put("uid", uid);
+	    map.put("deep", deep);
 	    sqlSession.insert(NAMESPACE+BATCHUPDATEREPORTWITHMAP,map);  
 	}  
 
