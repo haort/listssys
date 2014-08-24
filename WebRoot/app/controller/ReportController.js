@@ -26,7 +26,8 @@ Ext.define('LSYS.controller.ReportController', {
         'LSYS.view.Pie',
         'LSYS.view.ComboboxView',
         'LSYS.view.DescriptionPanel',
-        'LSYS.view.admin.AdminGrid'],
+        'LSYS.view.admin.AdminGrid',
+        'LSYS.view.admin.AdminFileUpload'],
 
     refs: [
         {
@@ -63,6 +64,10 @@ Ext.define('LSYS.controller.ReportController', {
         {
             ref: 'admintree',
             selector: 'admintree'
+        },
+        {
+            ref: 'adminfileupload',
+            selector: 'adminfileupload'
         }
     ],
 

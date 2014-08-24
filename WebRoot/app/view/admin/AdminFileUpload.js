@@ -22,10 +22,10 @@ Ext.define('LSYS.view.admin.AdminFileUpload', {
             fieldLabel: '文件名'
         },{
             xtype: 'filefield',
-            id: 'form-file',
+            id: 'file',
             emptyText: '选择一个文件',
             fieldLabel: '文件',
-            name: 'file-path',
+            name: 'file',
             buttonText: '',
             buttonConfig: {
                 iconCls: 'upload-icon'
@@ -43,7 +43,7 @@ Ext.define('LSYS.view.admin.AdminFileUpload', {
                 var form = this.up('form').getForm();
                 if(form.isValid()){
                     form.submit({
-                        url: 'file-upload.php',
+                        url: '/listssys/upload.json',
                         waitMsg: '正在上传...',
                         success: function(fp, o) {
                             msg('Success', tpl.apply(o.result));
