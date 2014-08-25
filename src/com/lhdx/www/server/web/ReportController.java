@@ -1,5 +1,6 @@
 package com.lhdx.www.server.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,8 +89,13 @@ public class ReportController {
 	
 	@RequestMapping(value = "/getPie")
 	public @ResponseBody
-	List getPie(@RequestParam("table") String table) {
-		return pieService.findPie(table);
+	List getPie(@RequestParam("table") String table,HttpServletRequest request) {
+		User u = getUser(request);
+		List list = new ArrayList();
+		if(u!=null){
+			list = pieService.findPie(table,u);
+		}
+		return list;
 	}
 	
 	@RequestMapping(value = "/updateOwner")

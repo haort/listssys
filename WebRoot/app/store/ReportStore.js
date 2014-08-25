@@ -1,5 +1,5 @@
 Ext.define('LSYS.store.ReportStore', {
     extend: 'Ext.data.Store',
     model: 'LSYS.model.ReportModel',
-    pageSize:10
+    pageSize:20
 });

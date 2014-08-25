@@ -1,7 +1,7 @@
 Ext.define('LSYS.store.AdminGridStore', {
     extend: 'Ext.data.Store',
     model: 'LSYS.model.ReportModel',
-    pageSize:10,
+    pageSize:20,
     proxy:{
         type: 'ajax',
         api: {

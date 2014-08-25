@@ -40,7 +40,8 @@
 
 	<update id="updateReportById" parameterType="java.util.HashMap">
 		update ${table} set
-		state = #{state}
+		state = #{state},
+		stateDate = #{stateDate}
 		where id = #{id}
     </update>
 

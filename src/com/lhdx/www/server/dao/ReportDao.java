@@ -1,5 +1,7 @@
 package com.lhdx.www.server.dao;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +38,12 @@ public class ReportDao extends BaseDao {
 	}
 	
 	public void updateReports(Report r,String table) {
+		Timestamp stateDate = new Timestamp(new Date().getTime());
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("id", r.getId());
 		map.put("state", r.getState());
 		map.put("table", table);
+		map.put("stateDate", stateDate);
 		sqlSession.update(NAMESPACE + UPDATEREPORTBYID,map);
 	}
 	

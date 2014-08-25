@@ -1,5 +1,7 @@
 package com.lhdx.www.server.model;
 
+import java.sql.Timestamp;
+
 public class Report {
 	private int id;
 	private String servName;
@@ -24,6 +26,7 @@ public class Report {
 	private int deep;
 	private String state;
 	private String chName;
+	private Timestamp stateDate;
 	public int getId() {
 		return id;
 	}
@@ -161,6 +164,12 @@ public class Report {
 	}
 	public void setChName(String chName) {
 		this.chName = chName;
+	}
+	public Timestamp getStateDate() {
+		return stateDate;
+	}
+	public void setStateDate(Timestamp stateDate) {
+		this.stateDate = stateDate;
 	}
 	
 }

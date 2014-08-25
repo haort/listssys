@@ -4,7 +4,16 @@
 <mapper namespace="com.lhdx.www.server.dao.PieDao">
 	<select id="selectPieByTable" resultMap="pieMap"
 		parameterType="java.util.HashMap">
-		select state,count(id) as count from ${table} group by state
+		select state,count(id) as count from ${table} 
+		<where>
+			<if test="user.area !=null and user.area !=''">
+				and area = #{user.area}
+	       </if>
+			<if test="user.chName !=null and user.chName !=''">
+				and chName = #{user.chName}
+	       </if>
+		</where>
+		group by state
 	</select>
 	
 	<resultMap type="Pie" id="pieMap">
