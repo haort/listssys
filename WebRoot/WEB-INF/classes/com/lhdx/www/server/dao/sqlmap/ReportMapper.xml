@@ -3,20 +3,22 @@
 
 <mapper namespace="com.lhdx.www.server.dao.ReportDao">
 	<select id="selectReports" resultMap="reportMap" parameterType="java.util.HashMap">
-		select id,name,acc,addr,area,phone,startdt,enddt,own,state from
+		select
+		id,servName,prodId,servAddr,accsNbr,ty,speed,startdt,prodTel,bipDataNum,bipDuration,area,rsrc,itvProdId,packName,kpiProdId,phone,wareName,gridName,own,deep,state,chName
+		from
 		${table}
 		<where>
 			<if test="isSend !=null and isSend !=''">
-				 deep = #{user.deep}
+				deep = #{user.deep}
 	       </if>
-	       <if test="user.area !=null and user.area !=''">
-				 and area = #{user.area}
+			<if test="user.area !=null and user.area !=''">
+				and area = #{user.area}
 	       </if>
-	        <if test="user.chname !=null and user.chname !=''">
-				 and chname = #{user.chname}
+			<if test="user.chName !=null and user.chName !=''">
+				and chName = #{user.chName}
 	       </if>
 		</where>
-		order by id
+		order by area,id
 		limit #{start},#{size}
 	</select>
 
@@ -25,52 +27,68 @@
 		select ifnull(count(1),0) from ${table}
 		<where>
 			<if test="isSend !=null and isSend !=''">
-				 deep = #{user.deep}
+				deep = #{user.deep}
 	       </if>
-	       <if test="user.area !=null and user.area !=''">
-				 and area = #{user.area}
+			<if test="user.area !=null and user.area !=''">
+				and area = #{user.area}
 	       </if>
-	        <if test="user.chname !=null and user.chname !=''">
-				 and chname = #{user.chname}
+			<if test="user.chName !=null and user.chName !=''">
+				and chName = #{user.chName}
 	       </if>
 		</where>
 	</select>
 
 	<update id="updateReportById" parameterType="java.util.HashMap">
-		update ${table} set state = #{state}
+		update ${table} set
+		state = #{state}
 		where id = #{id}
     </update>
 
-	<update id="batchUpdateReportWithMap" parameterType="java.util.Map" >  
-	    UPDATE ${table} 
-	     <set>   
-        <if test="user.uid!=null and user.uid!='' ">   
-            own = #{user.uid}, 
-        </if>   
-        <if test="user.deep!=null and user.deep!='' ">   
-            deep =#{user.deep},    
-        </if>   
-        <if test="user.chname!=null and user.chname!=''">     
-            chname=#{user.chname}   
-        </if>   
-    </set>   
-	    WHERE id IN   
-	    <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">   
-	        #{item}   
-	    </foreach>  
-	</update> 
+	<update id="batchUpdateReportWithMap" parameterType="java.util.Map">
+		UPDATE ${table}
+		<set>
+			<if test="user.uid!=null and user.uid!='' ">
+				own = #{user.uid}, 
+        </if>
+			<if test="user.deep!=null and user.deep!='' ">
+				deep =#{user.deep},    
+        </if>
+			<if test="user.chName!=null and user.chName!=''">
+				chName=#{user.chName}   
+        </if>
+		</set>
+		WHERE id IN
+		<foreach collection="idList" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}   
+	    </foreach>
+	</update>
 
 	<resultMap type="Report" id="reportMap">
 		<id property="id" column="id" />
-		<result property="name" column="name" />
-		<result property="acc" column="acc" />
-		<result property="phone" column="phone" />
-		<result property="addr" column="addr" />
-		<result property="area" column="area" />
-		<result property="startdt" column="startdt" />
-		<result property="enddt" column="enddt" />
 		<result property="own" column="own" />
+		<result property="servName" column="servName" />
+		<result property="prodId" column="prodId" />
+		<result property="servAddr" column="servAddr" />
+		<result property="accsNbr" column="accsNbr" />
+		<result property="ty" column="ty" />
+		<result property="speed" column="speed" />
+		<result property="startdt" column="startdt" />
+		<result property="prodTel" column="prodTel" />
+		<result property="bipDataNum" column="bipDataNum" />
+		<result property="bipDuration" column="bipDuration" />
+		<result property="area" column="area" />
+		<result property="rsrc" column="rsrc" />
+		<result property="itvProdId" column="itvProdId" />
+		<result property="packName" column="packName" />
+		<result property="kpiProdId" column="kpiProdId" />
+		<result property="phone" column="phone" />
+		<result property="wareName" column="wareName" />
+		<result property="gridName" column="gridName" />
+		<result property="own" column="own" />
+		<result property="deep" column="deep" />
 		<result property="state" column="state" />
+		<result property="chName" column="chName" />
 	</resultMap>
 
 </mapper>
