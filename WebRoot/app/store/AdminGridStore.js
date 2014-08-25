@@ -5,7 +5,7 @@ Ext.define('LSYS.store.AdminGridStore', {
     proxy:{
         type: 'ajax',
         api: {
-            read: '/listssys/service/adminReportList.json',
+            read: '/listssys/service/adminReportList.json'
         },
         reader: {
             type: 'json',

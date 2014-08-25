@@ -119,7 +119,7 @@ Ext.define('LSYS.controller.ReportController', {
 		gridStore.setProxy({
             type: 'ajax',
             api: {
-                read: '/listssys/service/reportList.json',
+                read: '/listssys/service/reportList.json'
             },
             reader: {
                 type: 'json',
@@ -154,7 +154,7 @@ Ext.define('LSYS.controller.ReportController', {
         	gridStore.setProxy({
                 type: 'ajax',
                 api: {
-                    read: '/listssys/service/reportList.json',
+                    read: '/listssys/service/reportList.json'
                 },
                 reader: {
                     type: 'json',
