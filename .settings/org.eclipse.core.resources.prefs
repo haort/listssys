@@ -1,8 +1,9 @@
-#Mon Aug 18 21:32:14 CST 2014
+#Thu Aug 28 16:50:32 CST 2014
 eclipse.preferences.version=1
 encoding//WebRoot/WEB-INF/views/index.html=UTF-8
 encoding//WebRoot/app/store/ComboboxStore.js=UTF-8
 encoding//WebRoot/app/view/report/List.js=UTF-8
 encoding//WebRoot/data/tree.json=UTF-8
 encoding//WebRoot/data/users.json=UTF-8
+encoding//src/com/lhdx/www/server/dao/sqlmap/ReportMapper.xml=UTF-8
 encoding/<project>=UTF-8

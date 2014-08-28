@@ -102,6 +102,13 @@ Ext.define('LSYS.controller.ReportController', {
            '#adminCancelBtn':{
         	   click:this.sendListCancel
            }
+           ,
+           'adminfileupload button[action=save]': {
+                click: this.uploadFile
+           },
+           'adminfileupload button[action=reset]': {
+                click: this.resetFile
+           }
         });
     },
 
@@ -187,13 +194,21 @@ Ext.define('LSYS.controller.ReportController', {
     	}else{
     		var action  =  rec.get("id");
     		if(action=="ACTION_SEND"){
+    			if(table!=null){
     			 var edit = Ext.create('LSYS.view.admin.AdminWin')
-    			 var adminList = this.getAdminlist();
-    			 var store = adminList.getStore();
-    			 Ext.apply(store.proxy.extraParams,{table:table});
-    			 store.load();
-    			 edit.show();
+       			 var adminList = this.getAdminlist();
+       			 var store = adminList.getStore();
+       			 Ext.apply(store.proxy.extraParams,{table:table});
+       			 store.load();
+       			 edit.show();
+    			}else{
+    				Ext.Msg.alert("提示", "请选择一个清单进行指派！");
+    			}
     			 
+    			 
+    		}else if(action=="ACTION_NEW"){
+    			 var upLoad = Ext.create('LSYS.view.admin.AdminFileUpload')
+    			 upLoad.show();
     		}
     	}
     },
@@ -250,6 +265,24 @@ Ext.define('LSYS.controller.ReportController', {
     sendListCancel:function(button){
     	var win = button.up('window');
     	win.close();
+    },
+    resetFile:function(button){
+    	button.up('form').getForm().reset();
+    },
+    uploadFile:function(button){
+            var form = button.up('form').getForm();
+           	var win = button.up('window');
+            if(form.isValid()){
+                form.submit({
+                    url: '/listssys/service/upload.json',
+                    waitMsg: '正在上传...',
+                    success: function(fp, o) {
+                	Ext.Msg.alert("Success", o.result.msg);
+                	form.reset();
+                	win.close();
+                    }
+                });
+            }
     }
     
 });

@@ -6,6 +6,7 @@ Ext.define('LSYS.view.admin.AdminFileUpload', {
     title: '文件上传',
     width: 800,
     height:500,
+    frame: true,
     modal : true,
     items:[{
         xtype:'form',
@@ -14,12 +15,14 @@ Ext.define('LSYS.view.admin.AdminFileUpload', {
             anchor: '100%',
             allowBlank: false,
             msgTarget: 'side',
-            labelWidth: 50
+            labelWidth: 80
         },
 
         items: [{
             xtype: 'textfield',
-            fieldLabel: '文件名'
+            fieldLabel: '派单名',
+            name:'text',
+            emptyText: '建议以日期结尾，如：宽带0831'
         },{
             xtype: 'filefield',
             id: 'file',
@@ -29,33 +32,28 @@ Ext.define('LSYS.view.admin.AdminFileUpload', {
             buttonText: '',
             buttonConfig: {
                 iconCls: 'upload-icon'
+            },
+            validator: function(value){
+            var arr = value.split('.');
+            if(arr[arr.length-1] != 'xls'){
+                return '只支持97-2003版本Excel！';
+            }else{
+                return true;
+            }
             }
         },{
             xtype: 'textareafield',
-            name: 'reportDescription',
+            name: 'description',
             fieldLabel: '派单描述',
-            value: '请填写相关派单描述'
+            emptyText: '请填写相关派单描述'
         }],
 
         buttons: [{
             text: '保存',
-            handler: function(){
-                var form = this.up('form').getForm();
-                if(form.isValid()){
-                    form.submit({
-                        url: '/listssys/upload.json',
-                        waitMsg: '正在上传...',
-                        success: function(fp, o) {
-                            msg('Success', tpl.apply(o.result));
-                        }
-                    });
-                }
-            }
+            action:'save'
         },{
             text: '重置',
-            handler: function() {
-                this.up('form').getForm().reset();
-            }
+            action:'reset'
         }]
     }]
 });

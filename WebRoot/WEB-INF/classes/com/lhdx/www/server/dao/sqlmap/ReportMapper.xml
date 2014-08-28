@@ -92,4 +92,63 @@
 		<result property="chName" column="chName" />
 	</resultMap>
 
+	<update id="createTableByName" parameterType="java.util.Map">
+		CREATE TABLE
+		${table} (
+		`id` int(11) NOT NULL auto_increment,
+		`servName` varchar(255)
+		DEFAULT NULL,
+		`prodId` varchar(255) DEFAULT NULL,
+		`servAddr`
+		varchar(255) DEFAULT NULL,
+		`accsNbr` varchar(255) DEFAULT NULL,
+		`ty`
+		varchar(255) DEFAULT NULL,
+		`speed` varchar(255) DEFAULT NULL,
+		`startdt`
+		varchar(255) DEFAULT NULL,
+		`prodTel` varchar(255) DEFAULT NULL,
+		`bipDataNum` varchar(255) DEFAULT NULL,
+		`bipDuration` varchar(255)
+		DEFAULT NULL,
+		`area` varchar(255) DEFAULT NULL,
+		`rsrc` varchar(255)
+		DEFAULT NULL,
+		`itvProdId` varchar(255) DEFAULT NULL,
+		`packName`
+		varchar(255) DEFAULT NULL,
+		`kpiProdId` varchar(255) DEFAULT NULL,
+		`phone` varchar(255) DEFAULT NULL,
+		`wareName` varchar(255) DEFAULT
+		NULL,
+		`gridName` varchar(255) DEFAULT NULL,
+		`areaName` varchar(50)
+		DEFAULT NULL,
+		`chName` varchar(255) DEFAULT NULL,
+		`own` varchar(255)
+		DEFAULT NULL,
+		`deep` int(11) DEFAULT 0,
+		`state` varchar(255) DEFAULT
+		'未外呼',
+		`stateDate` timestamp NULL DEFAULT NULL ON UPDATE
+		CURRENT_TIMESTAMP,
+		PRIMARY KEY (`id`)
+		)DEFAULT CHARSET=utf8;
+	</update>
+
+	<insert id="batchAddReports" parameterType="java.util.List">
+		INSERT INTO ${table} (servName, prodId,
+		servAddr,accsNbr,ty,speed,startdt,prodTel,bipDataNum,bipDuration,area,rsrc,itvProdId,packName,kpiProdId,phone,wareName,gridName,areaName,chName)
+		)
+		VALUES
+		<foreach collection="reports" item="item" index="index"
+			separator=",">
+			(#{item.servName}, #{item.prodId}, #{item.servAddr},
+			#{item.accsNbr}, #{item.ty}, #{item.speed}, #{item.startdt},
+			#{item.prodTel}, #{item.bipDataNum}, #{item.bipDuration},
+			#{item.area}, #{item.rsrc}, #{item.itvProdId}, #{item.packName},
+			#{item.kpiProdId}, #{item.phone}, #{item.wareName}, #{item.gridName},
+			#{item.areaName}, #{item.chName})
+		</foreach>
+	</insert>
 </mapper>

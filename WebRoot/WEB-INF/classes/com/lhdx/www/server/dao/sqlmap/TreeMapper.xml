@@ -3,19 +3,29 @@
 
 <mapper namespace="com.lhdx.www.server.dao.TreeDao">
 	<select id="selectTreeNode" resultMap="treeMap">
-		select nid,id,text,leaf,description from reporttable where leaf = 0
+		select
+		nid,id,text,leaf,description from reporttable where leaf = 0
 	</select>
-    
-    <select id="selectTreeNodeByParentId" resultMap="treeMap" parameterType="java.util.HashMap">
-		select nid,id,text,leaf,description from reporttable where parentid = #{nid}
+
+	<select id="selectTreeNodeByParentId" resultMap="treeMap"
+		parameterType="java.util.HashMap">
+		select nid,id,text,leaf,description from reporttable
+		where parentid = #{nid}
 	</select>
-	
+
+	<insert id="addTree" parameterType="com.lhdx.www.server.model.Tree">
+		insert into reporttable
+		(id,text,leaf,description,parentid)
+		values(#{id},#{text},#{leaf},#{description},#{parentid})
+	</insert>
+
 	<resultMap type="Tree" id="treeMap">
 		<id property="nid" column="nid" />
 		<result property="id" column="id" />
 		<result property="text" column="text" />
 		<result property="leaf" column="leaf" />
 		<result property="description" column="description" />
+		<result property="parentid" column="parentid" />
 	</resultMap>
 
 </mapper>

@@ -9,8 +9,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.lhdx.www.server.dao.ReportDao;
+import com.lhdx.www.server.dao.TreeDao;
 import com.lhdx.www.server.dao.UserDao;
 import com.lhdx.www.server.model.Report;
+import com.lhdx.www.server.model.Tree;
 import com.lhdx.www.server.model.User;
 
 
@@ -20,6 +22,8 @@ public class ReportService {
 	private ReportDao reportDao;
 	@Resource(name="userDao")
 	private UserDao userDao;
+	@Resource(name="treeDao")
+	private TreeDao treeDao;
 	
 	public Map<String,Object> findReports(int start,int size,String table,User user,String isSend){
 		 List<Report> list = reportDao.selectReports(start, size, table,user,isSend);
@@ -38,5 +42,22 @@ public class ReportService {
 	public void updateReportsOwn(String[] ids,String table,int uid){
 		 User u = userDao.selectuUserById(uid);
 		 reportDao.batchUpdateStudentWithMap(ids, table,u);
+	}
+	
+	public void createReports(String text,String description,List<Report> reports){
+		String table = "report"+System.currentTimeMillis();
+		Tree tree = new Tree();
+		tree.setId(table);
+		tree.setLeaf(true);
+		tree.setParentid(findParentIdByName());
+		tree.setText(text);
+		tree.setDescription(description);
+		treeDao.addTree(tree);
+		reportDao.createReports(table);
+		reportDao.batchUpdateReports(reports,table);
+	}
+	
+	public int findParentIdByName(){
+		return 1;
 	}
 }

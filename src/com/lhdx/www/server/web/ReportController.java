@@ -81,7 +81,12 @@ public class ReportController {
 				 root.setId("ACTION_SEND");
 				 root.setLeaf(false);
 				 root.setText("分配清单");
+				 Tree rootUpload = new Tree();
+				 rootUpload.setId("ACTION_NEW");
+				 rootUpload.setLeaf(false);
+				 rootUpload.setText("新建派单");
 				 list.add(root);
+				 list.add(rootUpload);
 			}
 		}
 		return list;

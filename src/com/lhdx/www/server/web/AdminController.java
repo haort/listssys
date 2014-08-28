@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lhdx.www.server.model.AdminTree;
-import com.lhdx.www.server.model.Tree;
 import com.lhdx.www.server.model.User;
 import com.lhdx.www.server.service.UserService;
 

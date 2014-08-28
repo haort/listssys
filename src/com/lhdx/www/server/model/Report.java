@@ -22,10 +22,11 @@ public class Report {
 	private String phone;
 	private String wareName;
 	private String gridName;
+	private String areaName;
+	private String chName;
 	private int own;
 	private int deep;
 	private String state;
-	private String chName;
 	private Timestamp stateDate;
 	public int getId() {
 		return id;
@@ -158,6 +159,13 @@ public class Report {
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+	
+	public String getAreaName() {
+		return areaName;
+	}
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
 	public String getChName() {
 		return chName;
