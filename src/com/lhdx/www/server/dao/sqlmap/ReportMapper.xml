@@ -138,7 +138,7 @@
 
 	<insert id="batchAddReports" parameterType="java.util.List">
 		INSERT INTO ${table} (servName, prodId,
-		servAddr,accsNbr,ty,speed,startdt,prodTel,bipDataNum,bipDuration,area,rsrc,itvProdId,packName,kpiProdId,phone,wareName,gridName,areaName,chName)
+		servAddr,accsNbr,ty,speed,startdt,prodTel,bipDataNum,bipDuration,area,rsrc,itvProdId,packName,kpiProdId,phone,wareName,gridName,areaName,chName
 		)
 		VALUES
 		<foreach collection="reports" item="item" index="index"
