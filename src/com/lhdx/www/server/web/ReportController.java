@@ -77,16 +77,25 @@ public class ReportController {
 		List<Tree> list = treeService.findTreeByList();
 		if(u!=null){
 			if(u.getAuthority().equals("admin")){
-				 Tree root = new Tree();
-				 root.setId("ACTION_SEND");
-				 root.setLeaf(false);
-				 root.setText("分配清单");
-				 Tree rootUpload = new Tree();
-				 rootUpload.setId("ACTION_NEW");
-				 rootUpload.setLeaf(false);
-				 rootUpload.setText("新建派单");
-				 list.add(root);
-				 list.add(rootUpload);
+				 Tree listManager = new Tree();
+				 listManager.setText("清单管理");
+				 listManager.setLeaf(false);
+				 Tree userManager = new Tree();
+				 userManager.setText("用户管理");
+				 userManager.setId("ACTION_USER");
+				 userManager.setLeaf(false);
+				 Tree sendList = new Tree();
+				 sendList.setId("ACTION_SEND");
+				 sendList.setLeaf(false);
+				 sendList.setText("分配清单");
+				 Tree newList = new Tree();
+				 newList.setId("ACTION_NEW");
+				 newList.setLeaf(false);
+				 newList.setText("新建派单");
+				 listManager.getChildren().add(sendList);
+				 listManager.getChildren().add(newList);
+				 list.add(listManager);
+				 list.add(userManager);
 			}
 		}
 		return list;

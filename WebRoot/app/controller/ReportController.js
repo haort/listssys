@@ -214,7 +214,10 @@ Ext.define('LSYS.controller.ReportController', {
     		}else if(action=="ACTION_NEW"){
     			 var upLoad = Ext.create('LSYS.view.admin.AdminFileUpload')
     			 upLoad.show();
-    		}
+    		}else if(action=="ACTION_USER"){
+   			 var userM = Ext.create('LSYS.view.admin.AdminUserManager')
+			 userM.show();
+		}
     	}
     },
     logout:function(){
