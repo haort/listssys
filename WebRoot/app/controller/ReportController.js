@@ -109,6 +109,10 @@ Ext.define('LSYS.controller.ReportController', {
            'adminfileupload button[action=reset]': {
                 click: this.resetFile
            }
+           ,
+           'adminfileupload button[action=download]': {
+                click: this.downloadFile
+           }
         });
     },
 
@@ -285,6 +289,9 @@ Ext.define('LSYS.controller.ReportController', {
                     }
                 });
             }
+    },
+    downloadFile:function(button){
+    	 window.location = "/listssys/service/downloadFile.json";
     }
     
 });

@@ -54,6 +54,9 @@ Ext.define('LSYS.view.admin.AdminFileUpload', {
         },{
             text: '重置',
             action:'reset'
+        },{
+            text: '模板下载',
+            action:'download'
         }]
     }]
 });

@@ -1,18 +1,27 @@
 package com.lhdx.www.server.web;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -73,4 +82,25 @@ public class FileUploadController {
 	        response.getWriter().write(FileReturn.UPLOAD_SUCCESS);  
 	        response.flushBuffer();  
 	    } 
+	  
+	  @RequestMapping("/downloadFile")  
+	    public  void download(HttpServletResponse response,HttpSession session,HttpServletRequest request) throws IOException {  
+	        
+	        response.setCharacterEncoding("UTF-8");
+	        request.setCharacterEncoding("UTF-8");
+	        //获取文件的路径
+	        String url=session.getServletContext().getRealPath("/")+"/template/template.xls";
+	        System.out.println(url);
+	        File file=new File(url);
+	        InputStream input = FileUtils.openInputStream(file);  
+	        byte[] data = IOUtils.toByteArray(input);  
+	        response.reset();  
+	        response.setHeader("content-disposition","attachment;fileName=template.xls");
+	        response.addHeader("Content-Length", "" + data.length);  
+	        response.setContentType("application/octet-stream; charset=UTF-8");  
+	       
+	        IOUtils.write(data, response.getOutputStream());  
+	        IOUtils.closeQuietly(input);  
+	       
+	    }
 }
