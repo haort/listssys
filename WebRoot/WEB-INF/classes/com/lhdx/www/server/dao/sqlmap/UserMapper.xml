@@ -26,6 +26,7 @@
 		<result property="departMent" column="department" />
 		<result property="area" column="area" />
 		<result property="deep" column="deep" />
+		<result property="parentid" column="parentid" />
 		<result property="chName" column="chName" />
 	</resultMap>
 

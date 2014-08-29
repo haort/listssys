@@ -1,5 +1,8 @@
 package com.lhdx.www.server.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User implements java.io.Serializable{
 	private static final long serialVersionUID = -8567939671669205177L;
 	private String userName;
@@ -10,6 +13,7 @@ public class User implements java.io.Serializable{
 	private String area;
 	private int deep;
 	private String chName;
+	private List<User> children = new ArrayList<User>();
 	public String getUserName() {
 		return userName;
 	}
@@ -57,6 +61,12 @@ public class User implements java.io.Serializable{
 	}
 	public void setChName(String chName) {
 		this.chName = chName;
+	}
+	public List<User> getChildren() {
+		return children;
+	}
+	public void setChildren(List<User> children) {
+		this.children = children;
 	}
 	
 }

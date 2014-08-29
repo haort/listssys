@@ -13,7 +13,7 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
     
     Ext.apply(this, {
         items: [{
-            title: 'Source',
+            title: '用户清单',
             xtype: 'treepanel',
             store: new Ext.data.TreeStore({
                 proxy: {
@@ -21,7 +21,7 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
                     url: '/listssys/service/getTreeListByList.json'
                 },
                 root: {
-                    text: 'Ext JS',
+                    text: '用户',
                     id: 'src',
                     expanded: true
                 },
@@ -31,10 +31,17 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
                     direction: 'ASC'
                 }]
             }),
+            viewConfig:{
+        		plugins:{
+        	        ptype:'treeviewdragdrop',
+        	        enableDrag:true,
+        	        enableDrop:true
+                }
+            },
             margin: '5 0 5 5',
             flex: 1
         }, {
-            title: 'Custom Build',
+            title: '用户信息',
             xtype: 'form',
             bodyPadding: 10,
             items:[{
@@ -52,7 +59,7 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
             },
             {
                 xtype: 'fieldset',
-                title: '用户信息',
+                title: '基本信息',
                 defaultType: 'textfield',
                 defaults: {
                     anchor: '100%'
@@ -74,8 +81,7 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
                 },
                 {
                     fieldLabel: '所属营业厅',
-                    name: 'chName',
-                    allowBlank:false
+                    name: 'chName'
                 },
                 {
                     xtype: 'admincoboview',
