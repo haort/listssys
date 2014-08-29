@@ -8,7 +8,8 @@ Ext.define('LSYS.controller.ReportController', {
         'LSYS.store.PieStore',
         'LSYS.store.ComboboxStore',
         'LSYS.store.AdminTreeStore',
-        'LSYS.store.AdminGridStore'],
+        'LSYS.store.AdminGridStore',
+        'LSYS.store.AdminComboboxStore'],
 
     models: [
         'LSYS.model.ReportModel',
@@ -28,7 +29,9 @@ Ext.define('LSYS.controller.ReportController', {
         'LSYS.view.DescriptionPanel',
         'LSYS.view.admin.AdminGrid',
         'LSYS.view.admin.AdminFileUpload',
-        'LSYS.view.Header'],
+        'LSYS.view.Header',
+        'LSYS.view.admin.AdminUserManager',
+        'LSYS.view.admin.AdminComboboxView'],
 
     refs: [
         {
