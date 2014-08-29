@@ -1,7 +1,10 @@
 Ext.define('LSYS.view.Viewport', {
     extend: 'Ext.container.Viewport',
     layout: 'border',
-    items: [
+    items: [{
+        region: 'north',
+        xtype: 'appHeader'
+    }, 
     {
          title:'菜单',
 	 region:'west',

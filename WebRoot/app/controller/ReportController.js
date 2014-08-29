@@ -27,7 +27,8 @@ Ext.define('LSYS.controller.ReportController', {
         'LSYS.view.ComboboxView',
         'LSYS.view.DescriptionPanel',
         'LSYS.view.admin.AdminGrid',
-        'LSYS.view.admin.AdminFileUpload'],
+        'LSYS.view.admin.AdminFileUpload',
+        'LSYS.view.Header'],
 
     refs: [
         {
