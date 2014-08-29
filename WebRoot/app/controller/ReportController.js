@@ -272,6 +272,7 @@ Ext.define('LSYS.controller.ReportController', {
     uploadFile:function(button){
             var form = button.up('form').getForm();
            	var win = button.up('window');
+           	var menuStore = this.getNavigation().getStore();
             if(form.isValid()){
                 form.submit({
                     url: '/listssys/service/upload.json',
@@ -280,6 +281,7 @@ Ext.define('LSYS.controller.ReportController', {
                 	Ext.Msg.alert("Success", o.result.msg);
                 	form.reset();
                 	win.close();
+                	menuStore.load();
                     }
                 });
             }
