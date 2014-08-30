@@ -319,6 +319,7 @@ Ext.define('LSYS.controller.ReportController', {
     	button.up('form').getForm().reset();
     },
     saveUserForm:function(button){
+    	button.up('form').getForm().submit();
     },
     modifyUserForm:function(button){
     	var win = button.up('window');
