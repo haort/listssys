@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lhdx.www.server.model.AdminTree;
@@ -56,5 +57,21 @@ public class AdminController {
 			return u;
 		}
 		else return null;
+	}
+	
+	@RequestMapping(value = "/updateUserParentId")
+	public @ResponseBody
+	String updateUserParentId(
+			@RequestParam("selectId") int uid,
+			@RequestParam("targetDeep") int deep,
+			@RequestParam("tagertId") int parentid,HttpServletRequest request) {
+		User u = getUser(request);
+		if(u!=null){
+			if(u.getAuthority().equals("admin")){
+				userService.updateUserParentId(uid,parentid,deep);
+			}
+		}
+		
+		return "Success";
 	}
 }

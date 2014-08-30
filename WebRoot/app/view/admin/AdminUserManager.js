@@ -16,13 +16,31 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
             title: '用户清单',
             xtype: 'treepanel',
             store:'LSYS.store.AdminUserTreeStore',
+            rootVisible : false,
+        	lines : false,
+        	useArrows : true,
             viewConfig:{
         		plugins:{
         	        ptype:'treeviewdragdrop',
         	        enableDrag:true,
-        	        enableDrop:true
-                }
+        	        enableDrop:true,
+        	        appendOnly:true
+			    },
+			    listeners: {
+			    	drop:function(node,data,overModel,dropPosition,options){
+				        Ext.Ajax.request({
+			                url: '/listssys/service/updateUserParentId.json',
+			                params: {selectId: data.records[0].get('uid'), tagertId: overModel.get("uid"),targetDeep:overModel.get('deep')},
+			                method: 'Post',
+			                success: function (response, options) {
+			                },
+			                failure: function (response, options) {
+			                }
+			            });
+			       }
+			    }
             },
+            
             margin: '5 0 5 5',
             flex: 1
         }, {

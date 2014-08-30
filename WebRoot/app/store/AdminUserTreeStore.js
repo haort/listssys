@@ -6,7 +6,6 @@ Ext.define('LSYS.store.AdminUserTreeStore', {
         url: '/listssys/service/getAdminUser.json'
     },
     root: {
-    	text:'用户',
         expanded: true
     },
     folderSort: true,

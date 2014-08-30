@@ -17,6 +17,7 @@ public class UserDao extends BaseDao {
 	private static final String SELECTUSERBYPARENTID = ".selectUserByParentId";
 	private static final String SELECTADMINIUSER = ".selectAdminUser";
 	private static final String SELECTADMINTREENODEBYPARENTID = ".selectAdminTreeNodeByParentId";
+	private static final String UPDATEUSERPARENTID = ".updateUserParentId";
 	
 	public User selectuUserByNameAndPwd(String userName,String pwd) {
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -45,5 +46,13 @@ public class UserDao extends BaseDao {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("uid", uid);
 		return sqlSession.selectList(NAMESPACE + SELECTADMINTREENODEBYPARENTID,map);
+	}
+	
+	public void updateUserParentId(int uid,int parentId,int deep){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("uid", uid);
+		map.put("parentId", parentId);
+		map.put("deep", deep);
+		sqlSession.update(NAMESPACE+UPDATEUSERPARENTID, map);
 	}
 }

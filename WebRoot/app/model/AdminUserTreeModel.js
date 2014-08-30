@@ -24,5 +24,7 @@ Ext.define('LSYS.model.AdminUserTreeModel', {
 		name :'text'
 	},{
 		name :'qtip'
+	},{
+		name:'deep'
 	}]
 });

@@ -234,6 +234,9 @@ Ext.define('LSYS.controller.ReportController', {
     			 upLoad.show();
     		}else if(action=="ACTION_USER"){
    			 var userM = Ext.create('LSYS.view.admin.AdminUserManager')
+   			 var win = this.getAdminusermanager();
+   			 var tree = win.down('treepanel');
+   			 tree.expandAll();
 			 userM.show();
 		}
     	}

@@ -10,7 +10,7 @@
     
     <select id="selectUserById" resultMap="userMap"
 		parameterType="java.util.HashMap">
-		select uid,username,password,authority,departMent,area,deep,chName,name
+		select uid,username,password,authority,departMent,area,deep,chName,name,parentid
 		from user where uid = #{uid}
 	</select>
 	
@@ -25,6 +25,13 @@
 	<select id="selectAdminUser" resultMap="userMap" parameterType="java.util.HashMap">
 		select uid,username,password,authority,departMent,area,deep,chName,parentid,name from user where parentid = -1
 	</select>
+	
+	<update id="updateUserParentId" parameterType="java.util.HashMap">
+		update user set
+		parentid = #{parentId},
+		deep = #{deep}+1
+		where uid = #{uid}
+    </update>
 	
 	<resultMap type="User" id="userMap">
 		<id property="uid" column="uid" />

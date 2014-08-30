@@ -65,4 +65,9 @@ public class UserService {
 		u.setQtip(qtip);
 		return u;
 	}
+	
+	public void updateUserParentId(int uid,int parentId,int deep){
+		userDao.updateUserParentId(uid,parentId,deep);
+		 
+	}
 }
