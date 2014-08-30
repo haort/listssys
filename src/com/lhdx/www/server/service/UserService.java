@@ -53,14 +53,14 @@ public class UserService {
 	private User convertToTree(User u){
 		u.setText(u.getName());
 		String qtip = "";
-		if(u.getDepartMent()!=null&&u.getDepartMent()!=""){
-			qtip+="部门："+u.getDepartMent();
+		if(u.getDepartMent()!=null&&!"".equals(u.getDepartMent())){
+			qtip+="部门："+u.getDepartMent()+"<br/>";
 		}
-		if(u.getArea()!=null&&u.getArea()!=""){
-			qtip+="区域："+u.getArea();
+		if(u.getArea()!=null&&!"".equals(u.getArea())){
+			qtip+="区域："+u.getArea()+"<br/>";
 		}
-		if(u.getChName()!=null&&u.getChName()!=""){
-			qtip+="营业厅："+u.getChName();
+		if(u.getChName()!=null&&!"".equals(u.getChName())){
+			qtip+="营业厅："+u.getChName()+"<br/>";
 		}
 		u.setQtip(qtip);
 		return u;
