@@ -1,6 +1,8 @@
 package com.lhdx.www.server.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -35,14 +37,16 @@ public class AdminController {
 	
 	@RequestMapping(value = "/getAdminUser")
 	public @ResponseBody
-	User getAdminUser(HttpServletRequest request) {
+	Map getAdminUser(HttpServletRequest request) {
+		Map<String,Object> map = new HashMap<String,Object>(); 
 		User u = getUser(request);
 		if(u!=null){
 			if(u.getAuthority().equals("admin")){
 				u = userService.findUsersByParentId();
 			}
 		}
-		return  u;
+		map.put("children", u);
+		return  map;
 	}
 	
 	
