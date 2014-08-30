@@ -24,12 +24,33 @@ public class AdminController {
 	public @ResponseBody
 	List getTreeListByList(HttpServletRequest request) {
 		List<AdminTree> list = null;
-		if(request.getSession().getAttribute("user")!=null){
-			User u = (User) request.getSession().getAttribute("user");
+		User u = getUser(request);
+		if(u!=null){
 			if(u.getAuthority().equals("admin")){
 				list = userService.findAdminTreeByParentId(u.getUid());
 			}
 		}
 		return list;
+	}
+	
+	@RequestMapping(value = "/getAdminUser")
+	public @ResponseBody
+	User getAdminUser(HttpServletRequest request) {
+		User u = getUser(request);
+		if(u!=null){
+			if(u.getAuthority().equals("admin")){
+				u = userService.findUsersByParentId();
+			}
+		}
+		return  u;
+	}
+	
+	
+	private User getUser(HttpServletRequest request){
+		if(request.getSession().getAttribute("user")!=null){
+			User u = (User) request.getSession().getAttribute("user");
+			return u;
+		}
+		else return null;
 	}
 }

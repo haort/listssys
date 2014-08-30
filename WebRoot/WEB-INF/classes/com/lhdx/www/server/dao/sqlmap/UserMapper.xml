@@ -4,18 +4,26 @@
 <mapper namespace="com.lhdx.www.server.dao.UserDao">
 	<select id="selectUserByNameAndPwd" resultMap="userMap"
 		parameterType="java.util.HashMap">
-		select uid,username,password,authority,departMent,area,deep,chName
+		select uid,username,password,authority,departMent,area,deep,chName,name
 		from user where username = #{userName} and password = #{pwd}
 	</select>
     
     <select id="selectUserById" resultMap="userMap"
 		parameterType="java.util.HashMap">
-		select uid,username,password,authority,departMent,area,deep,chName
+		select uid,username,password,authority,departMent,area,deep,chName,name
 		from user where uid = #{uid}
 	</select>
 	
     <select id="selectAdminTreeNodeByParentId" resultMap="adminTreeMap" parameterType="java.util.HashMap">
-		select uid as id,username as text from user where parentid = #{uid}
+		select uid as id,name as text from user where parentid = #{uid}
+	</select>
+	
+	<select id="selectUserByParentId" resultMap="userMap" parameterType="java.util.HashMap">
+		select uid,username,password,authority,departMent,area,deep,chName,parentid,name from user where parentid = #{parentId}
+	</select>
+	
+	<select id="selectAdminUser" resultMap="userMap" parameterType="java.util.HashMap">
+		select uid,username,password,authority,departMent,area,deep,chName,parentid,name from user where parentid = -1
 	</select>
 	
 	<resultMap type="User" id="userMap">
@@ -28,6 +36,7 @@
 		<result property="deep" column="deep" />
 		<result property="parentid" column="parentid" />
 		<result property="chName" column="chName" />
+		<result property="name" column="name" />
 	</resultMap>
 
     <resultMap type="AdminTree" id="adminTreeMap">

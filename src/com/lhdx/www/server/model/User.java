@@ -7,12 +7,16 @@ public class User implements java.io.Serializable{
 	private static final long serialVersionUID = -8567939671669205177L;
 	private String userName;
 	private int uid;
+	private String text;
+	private String qtip;
 	private String password;
 	private String authority;
 	private String departMent;
 	private String area;
 	private int deep;
+	private int parentid;
 	private String chName;
+	private String name;
 	private List<User> children = new ArrayList<User>();
 	public String getUserName() {
 		return userName;
@@ -67,6 +71,30 @@ public class User implements java.io.Serializable{
 	}
 	public void setChildren(List<User> children) {
 		this.children = children;
+	}
+	public int getParentid() {
+		return parentid;
+	}
+	public void setParentid(int parentid) {
+		this.parentid = parentid;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+	public String getQtip() {
+		return qtip;
+	}
+	public void setQtip(String qtip) {
+		this.qtip = qtip;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

@@ -15,22 +15,7 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
         items: [{
             title: '用户清单',
             xtype: 'treepanel',
-            store: new Ext.data.TreeStore({
-                proxy: {
-                    type: 'ajax',
-                    url: '/listssys/service/getTreeListByList.json'
-                },
-                root: {
-                    text: '用户',
-                    id: 'src',
-                    expanded: true
-                },
-                folderSort: true,
-                sorters: [{
-                    property: 'text',
-                    direction: 'ASC'
-                }]
-            }),
+            store:'LSYS.store.AdminUserTreeStore',
             viewConfig:{
         		plugins:{
         	        ptype:'treeviewdragdrop',
@@ -52,8 +37,8 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
                     anchor: '100%'
                 },
                 items: [
-                    { fieldLabel: '用户ID', name: 'uid'},
-                    { allowBlank:false, fieldLabel: '登录名', name: 'username'},
+                    { fieldLabel: '用户ID', name: 'uid',hidden:true},
+                    { allowBlank:false, fieldLabel: '登录名', name: 'userName'},
                     { allowBlank:false, fieldLabel: '密码', name: 'password', inputType: 'password' }
                 ]
             },
@@ -71,7 +56,7 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
                 },
                 {
                     fieldLabel: '部门',
-                    name: 'department',
+                    name: 'departMent',
                     allowBlank:false
                 },
                 {
@@ -86,16 +71,23 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
                 {
                     xtype: 'admincoboview',
                     fieldLabel: '权限',
+                    name: 'authority',
                     allowBlank:false
                 }]
             }],
-            buttons: [{
+            buttons: [
+            {
+                text: '修改',
+                action:'modify'
+            },{
                 text: '保存',
                 disabled: true,
-                formBind: true
+                formBind: true,
+                action:'save'
             },
             {
-                text: '重置'
+                text: '重置',
+                action:'reset'
             }],
             margin: '5 5 5 5',
             flex: 1

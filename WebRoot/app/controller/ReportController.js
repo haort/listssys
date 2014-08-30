@@ -9,14 +9,16 @@ Ext.define('LSYS.controller.ReportController', {
         'LSYS.store.ComboboxStore',
         'LSYS.store.AdminTreeStore',
         'LSYS.store.AdminGridStore',
-        'LSYS.store.AdminComboboxStore'],
+        'LSYS.store.AdminComboboxStore',
+        'LSYS.store.AdminUserTreeStore'],
 
     models: [
         'LSYS.model.ReportModel',
         'LSYS.model.MenuModel',
         'LSYS.model.PieModel',
         'LSYS.model.ComboboxModel',
-        'LSYS.model.AdminTreeModel'
+        'LSYS.model.AdminTreeModel',
+        'LSYS.model.AdminUserTreeModel'
     ],
 
     views: [
@@ -72,6 +74,10 @@ Ext.define('LSYS.controller.ReportController', {
         {
             ref: 'adminfileupload',
             selector: 'adminfileupload'
+        },
+        {
+            ref: 'adminusermanager',
+            selector: 'adminusermanager'
         }
     ],
 
@@ -116,6 +122,15 @@ Ext.define('LSYS.controller.ReportController', {
            ,
            'adminfileupload button[action=download]': {
                 click: this.downloadFile
+           },
+           'adminusermanager button[action=reset]': {
+               click: this.resetUserForm
+           },
+           'adminusermanager button[action=save]': {
+              click: this.saveUserForm
+           },
+           'adminusermanager button[action=modify]': {
+             click: this.modifyUserForm
            }
         });
     },
@@ -299,6 +314,22 @@ Ext.define('LSYS.controller.ReportController', {
     },
     downloadFile:function(button){
     	 window.location = "/listssys/service/downloadFile.json";
+    },
+    resetUserForm:function(button){
+    	button.up('form').getForm().reset();
+    },
+    saveUserForm:function(button){
+    },
+    modifyUserForm:function(button){
+    	var win = button.up('window');
+    	var form = win.down('form');
+    	var tree = win.down('treepanel');
+    	var node = tree.getSelectionModel().getLastSelected();
+    	if(node!=null){
+    		form.loadRecord(node);
+    	}else{
+        	Ext.Msg.alert("提示", "请选择一个用户进行修改");
+        }
     }
     
 });
