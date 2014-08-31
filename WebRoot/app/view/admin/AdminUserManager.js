@@ -80,20 +80,30 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
                 {
                     fieldLabel: '所属区域',
                     name: 'area',
-                    allowBlank:false
+                    xtype: 'areacobo',
+                    editable:true,
+                    allowBlank:true
                 },
                 {
+                    xtype: 'chcobo',
                     fieldLabel: '所属营业厅',
-                    name: 'chName'
+                    name: 'chName',
+                    editable:true,
+                    allowBlank:true
                 },
                 {
                     xtype: 'admincoboview',
                     fieldLabel: '权限',
                     name: 'authority',
+                    editable:false,
                     allowBlank:false
                 }]
             }],
             buttons: [
+			{
+			    text: '删除',
+			    action:'delete'
+			},
             {
                 text: '修改',
                 action:'modify'

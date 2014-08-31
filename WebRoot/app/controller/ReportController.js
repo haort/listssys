@@ -9,8 +9,10 @@ Ext.define('LSYS.controller.ReportController', {
         'LSYS.store.ComboboxStore',
         'LSYS.store.AdminTreeStore',
         'LSYS.store.AdminGridStore',
-        'LSYS.store.AdminComboboxStore',
-        'LSYS.store.AdminUserTreeStore'],
+        'LSYS.store.AuthorityComboboxStore',
+        'LSYS.store.ChComboboxStore',
+        'LSYS.store.AdminUserTreeStore',
+        'LSYS.store.AreaComboboxStore'],
 
     models: [
         'LSYS.model.ReportModel',
@@ -33,7 +35,9 @@ Ext.define('LSYS.controller.ReportController', {
         'LSYS.view.admin.AdminFileUpload',
         'LSYS.view.Header',
         'LSYS.view.admin.AdminUserManager',
-        'LSYS.view.admin.AdminComboboxView'],
+        'LSYS.view.admin.AuthorityCombobox',
+        'LSYS.view.admin.ChCombobox',
+        'LSYS.view.admin.AreaCombobox'],
 
     refs: [
         {
@@ -78,6 +82,14 @@ Ext.define('LSYS.controller.ReportController', {
         {
             ref: 'adminusermanager',
             selector: 'adminusermanager'
+        },
+        {
+            ref: 'areacobo',
+            selector: 'areacobo'
+        },
+        {
+            ref: 'chcobo',
+            selector: 'chcobo'
         }
     ],
 
@@ -130,7 +142,13 @@ Ext.define('LSYS.controller.ReportController', {
               click: this.saveUserForm
            },
            'adminusermanager button[action=modify]': {
-             click: this.modifyUserForm
+        	   click: this.modifyUserForm
+           },
+           'adminusermanager button[action=delete]': {
+               click: this.deleteUserForm
+           },
+           'areacobo':{
+        	   change:this.changeArea
            }
         });
     },
@@ -307,7 +325,7 @@ Ext.define('LSYS.controller.ReportController', {
                     url: '/listssys/service/upload.json',
                     waitMsg: '正在上传...',
                     success: function(fp, o) {
-                	Ext.Msg.alert("Success", o.result.msg);
+                	Ext.Msg.alert("成功", o.result.msg);
                 	form.reset();
                 	win.close();
                 	menuStore.load();
@@ -322,7 +340,22 @@ Ext.define('LSYS.controller.ReportController', {
     	button.up('form').getForm().reset();
     },
     saveUserForm:function(button){
-    	button.up('form').getForm().submit();
+    	button.up('form').getForm().submit({
+    			url:'/listssys/service/updateOrAddUser.json',
+    			method:'POST',
+    			params:{user:button.up('form').getForm().getValues()},
+                waitTitle : "提示",
+                waitMsg: '正在保存数据',
+                success: function(form, action){
+    				Ext.Msg.alert("成功", action.result.msg);
+                    var win = button.up('window');
+            	    var tree = win.down('treepanel');
+            	    var store = tree.getStore();
+            	    store.reload();
+                },
+                failure: function(form, action){
+                }
+    	});
     },
     modifyUserForm:function(button){
     	var win = button.up('window');
@@ -334,7 +367,39 @@ Ext.define('LSYS.controller.ReportController', {
     	}else{
         	Ext.Msg.alert("提示", "请选择一个用户进行修改");
         }
-    }
+    },
+    deleteUserForm:function(button){
+    	var win = button.up('window');
+    	var form = win.down('form');
+    	var tree = win.down('treepanel');
+    	var node = tree.getSelectionModel().getLastSelected();
+    	if(node!=null){
+    		Ext.Ajax.request({
+                url: '/listssys/service/deleteUser.json',
+                params: {uid: node.get("uid")},
+                method: 'Post',
+                success: function (response, options) {
+                    Ext.MessageBox.alert('成功', '删除成功！');
+                    var win = button.up('window');
+            	    var tree = win.down('treepanel');
+            	    var store = tree.getStore();
+            	    store.reload();
+            	    tree.expandAll();
+                },
+                failure: function (response, options) {
+                    Ext.MessageBox.alert('失败', '请求超时或网络故障,错误编号：' + response.status);
+                }
+            });
+    	}else{
+        	Ext.Msg.alert("提示", "请选择一个用户进行删除");
+        }
+    },
+    changeArea:function(areaCombo){  
+        var area = areaCombo.getValue()  
+        var chStore = this.getChcobo().getStore()  
+        chStore.clearFilter();  
+        chStore.filter("area",area);   
+       } 
     
 });
 

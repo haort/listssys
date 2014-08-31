@@ -1,4 +1,4 @@
-Ext.define('LSYS.store.AdminComboboxStore', {
+Ext.define('LSYS.store.AuthorityComboboxStore', {
     extend: 'Ext.data.Store',
     fields: ['name', 'authority'],
     data : [

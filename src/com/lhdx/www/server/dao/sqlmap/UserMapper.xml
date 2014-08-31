@@ -4,35 +4,66 @@
 <mapper namespace="com.lhdx.www.server.dao.UserDao">
 	<select id="selectUserByNameAndPwd" resultMap="userMap"
 		parameterType="java.util.HashMap">
-		select uid,username,password,authority,departMent,area,deep,chName,name
-		from user where username = #{userName} and password = #{pwd}
+		select
+		uid,username,password,authority,departMent,area,deep,chName,name
+		from
+		user where username = #{userName} and password = #{pwd}
 	</select>
-    
-    <select id="selectUserById" resultMap="userMap"
-		parameterType="java.util.HashMap">
-		select uid,username,password,authority,departMent,area,deep,chName,name,parentid
+
+	<select id="selectUserById" resultMap="userMap" parameterType="java.util.HashMap">
+		select
+		uid,username,password,authority,departMent,area,deep,chName,name,parentid
 		from user where uid = #{uid}
 	</select>
-	
-    <select id="selectAdminTreeNodeByParentId" resultMap="adminTreeMap" parameterType="java.util.HashMap">
-		select uid as id,name as text from user where parentid = #{uid}
+
+	<select id="selectAdminTreeNodeByParentId" resultMap="adminTreeMap"
+		parameterType="java.util.HashMap">
+		select uid as id,name as text from user where parentid =
+		#{uid}
 	</select>
-	
-	<select id="selectUserByParentId" resultMap="userMap" parameterType="java.util.HashMap">
-		select uid,username,password,authority,departMent,area,deep,chName,parentid,name from user where parentid = #{parentId}
+
+	<select id="selectUserByParentId" resultMap="userMap"
+		parameterType="java.util.HashMap">
+		select
+		uid,username,password,authority,departMent,area,deep,chName,parentid,name
+		from user where parentid = #{parentId}
 	</select>
-	
+
 	<select id="selectAdminUser" resultMap="userMap" parameterType="java.util.HashMap">
-		select uid,username,password,authority,departMent,area,deep,chName,parentid,name from user where parentid = -1
+		select
+		uid,username,password,authority,departMent,area,deep,chName,parentid,name
+		from user where parentid = -1
 	</select>
-	
+
 	<update id="updateUserParentId" parameterType="java.util.HashMap">
 		update user set
 		parentid = #{parentId},
 		deep = #{deep}+1
 		where uid = #{uid}
     </update>
+
+	<update id="updateUserById" parameterType="java.util.HashMap">
+		update user set
+		username = #{user.userName},
+		password = #{user.password},
+		authority =#{user.authority},
+		department = #{user.departMent},
+		area = #{user.area},
+		chName = #{user.chName},
+		name = #{user.name}
+		where uid = #{user.uid}
+    </update>
+
+	<insert id="addUser" parameterType="java.util.HashMap">
+		insert into user
+		(username,password,authority,department,area,deep,parentid,chName,name)
+		values(#{user.userName},#{user.password},#{user.authority},#{user.departMent},#{user.area},#{user.deep},#{user.parentid},#{user.chName},#{user.name})
+	</insert>
 	
+	<delete id="deleteUserById"  parameterType="int" >
+	    delete from user where uid = #{uid}
+	</delete>
+
 	<resultMap type="User" id="userMap">
 		<id property="uid" column="uid" />
 		<result property="userName" column="username" />
@@ -46,7 +77,7 @@
 		<result property="name" column="name" />
 	</resultMap>
 
-    <resultMap type="AdminTree" id="adminTreeMap">
+	<resultMap type="AdminTree" id="adminTreeMap">
 		<result property="id" column="java.lang.Integer" />
 		<result property="text" column="java.lang.String" />
 	</resultMap>
