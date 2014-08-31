@@ -17,6 +17,7 @@ public class User implements java.io.Serializable{
 	private int parentid;
 	private String chName;
 	private String name;
+	private String iconCls;
 	private List<User> children = new ArrayList<User>();
 	public String getUserName() {
 		return userName;
@@ -95,6 +96,12 @@ public class User implements java.io.Serializable{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getIconCls() {
+		return iconCls;
+	}
+	public void setIconCls(String iconCls) {
+		this.iconCls = iconCls;
 	}
 	
 }

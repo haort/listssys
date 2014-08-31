@@ -337,25 +337,31 @@ Ext.define('LSYS.controller.ReportController', {
     	 window.location = "/listssys/service/downloadFile.json";
     },
     resetUserForm:function(button){
-    	button.up('form').getForm().reset();
+    	var win = button.up('window');
+    	var form = win.down('form');
+    	form.getForm().reset();
     },
     saveUserForm:function(button){
-    	button.up('form').getForm().submit({
-    			url:'/listssys/service/updateOrAddUser.json',
-    			method:'POST',
-    			params:{user:button.up('form').getForm().getValues()},
-                waitTitle : "提示",
-                waitMsg: '正在保存数据',
-                success: function(form, action){
-    				Ext.Msg.alert("成功", action.result.msg);
-                    var win = button.up('window');
-            	    var tree = win.down('treepanel');
-            	    var store = tree.getStore();
-            	    store.reload();
-                },
-                failure: function(form, action){
-                }
-    	});
+    	var win = button.up('window');
+    	var form = win.down('form');
+    	if(form.getForm().isValid()){
+	    	form.getForm().submit({
+	    			url:'/listssys/service/updateOrAddUser.json',
+	    			method:'POST',
+	    			params:{user:form.getForm().getValues()},
+	                waitTitle : "提示",
+	                waitMsg: '正在保存数据',
+	                success: function(form, action){
+	    				Ext.Msg.alert("成功", action.result.msg);
+	                    var win = button.up('window');
+	            	    var tree = win.down('treepanel');
+	            	    var store = tree.getStore();
+	            	    store.reload();
+	                },
+	                failure: function(form, action){
+	                }
+	    	});
+    	}
     },
     modifyUserForm:function(button){
     	var win = button.up('window');
@@ -369,30 +375,35 @@ Ext.define('LSYS.controller.ReportController', {
         }
     },
     deleteUserForm:function(button){
-    	var win = button.up('window');
-    	var form = win.down('form');
-    	var tree = win.down('treepanel');
-    	var node = tree.getSelectionModel().getLastSelected();
-    	if(node!=null){
-    		Ext.Ajax.request({
-                url: '/listssys/service/deleteUser.json',
-                params: {uid: node.get("uid")},
-                method: 'Post',
-                success: function (response, options) {
-                    Ext.MessageBox.alert('成功', '删除成功！');
-                    var win = button.up('window');
-            	    var tree = win.down('treepanel');
-            	    var store = tree.getStore();
-            	    store.reload();
-            	    tree.expandAll();
-                },
-                failure: function (response, options) {
-                    Ext.MessageBox.alert('失败', '请求超时或网络故障,错误编号：' + response.status);
-                }
-            });
-    	}else{
-        	Ext.Msg.alert("提示", "请选择一个用户进行删除");
-        }
+    	 Ext.Msg.confirm("请确认", "是否真的要刪除所选用户？", function(btn, text) { 
+             if (btn == "yes") { 
+            	 var win = button.up('window');
+             	var form = win.down('form');
+             	var tree = win.down('treepanel');
+             	var node = tree.getSelectionModel().getLastSelected();
+             	if(node!=null){
+             		Ext.Ajax.request({
+                         url: '/listssys/service/deleteUser.json',
+                         params: {uid: node.get("uid")},
+                         method: 'Post',
+                         success: function (response, options) {
+                             Ext.MessageBox.alert('成功', '删除成功！');
+                             var win = button.up('window');
+                     	    var tree = win.down('treepanel');
+                     	    var store = tree.getStore();
+                     	    store.reload();
+                     	    tree.expandAll();
+                         },
+                         failure: function (response, options) {
+                             Ext.MessageBox.alert('失败', '请求超时或网络故障,错误编号：' + response.status);
+                         }
+                     });
+             	}else{
+                 	Ext.Msg.alert("提示", "请选择一个用户进行删除");
+                 }
+             }
+    	 });
+    	
     },
     changeArea:function(areaCombo){  
         var area = areaCombo.getValue()  

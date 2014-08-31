@@ -62,6 +62,7 @@ public class UserService {
 			qtip += "营业厅：" + u.getChName() + "<br/>";
 		}
 		u.setQtip(qtip);
+		u.setIconCls("user");
 		return u;
 	}
 

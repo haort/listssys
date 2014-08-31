@@ -5,7 +5,7 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
     autoShow: true,
     title: '用户管理',
     width: 800,
-    height:500,
+    height:400,
     frame: true,
     modal : true,
     initComponent: function(){
@@ -40,7 +40,33 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
 			       }
 			    }
             },
-            
+            tbar: {
+                xtype: 'toolbar',
+                items: [
+                {
+                    tooltip:'新增或保存用户',
+                    iconCls:'user-add',
+                    action:'save'
+                },
+                ' ',
+                {
+                    tooltip:'删除用户',
+                    iconCls:'user-delete',
+    			    action:'delete'
+                },
+                ' ',
+                {
+                    tooltip:'修改用户',
+                    iconCls:'user-edit',
+                    action:'modify'
+                },
+                ' ',
+                {
+                    tooltip:'重置',
+                    iconCls:'user-reset',
+                    action:'reset'
+                }]
+            },
             margin: '5 0 5 5',
             flex: 1
         }, {
@@ -98,24 +124,6 @@ Ext.define('LSYS.view.admin.AdminUserManager', {
                     editable:false,
                     allowBlank:false
                 }]
-            }],
-            buttons: [
-			{
-			    text: '删除',
-			    action:'delete'
-			},
-            {
-                text: '修改',
-                action:'modify'
-            },{
-                text: '保存',
-                disabled: true,
-                formBind: true,
-                action:'save'
-            },
-            {
-                text: '重置',
-                action:'reset'
             }],
             margin: '5 5 5 5',
             flex: 1
