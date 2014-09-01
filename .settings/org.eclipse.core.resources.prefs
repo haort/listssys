@@ -1,6 +1,7 @@
-#Thu Aug 28 16:50:32 CST 2014
+#Mon Sep 01 14:39:16 CST 2014
 eclipse.preferences.version=1
 encoding//WebRoot/WEB-INF/views/index.html=UTF-8
+encoding//WebRoot/WEB-INF/views/login.html=UTF-8
 encoding//WebRoot/app/store/ComboboxStore.js=UTF-8
 encoding//WebRoot/app/view/report/List.js=UTF-8
 encoding//WebRoot/data/tree.json=UTF-8
