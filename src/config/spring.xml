@@ -37,12 +37,12 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
         </property>
         <property name="user"               value="${db.userName}" />
         <property name="password"           value="${db.password}" />
-        <property name="maxPoolSize"        value="12" />
+        <property name="maxPoolSize"        value="20" />
         <property name="minPoolSize"        value="0" />
-        <property name="maxStatements"      value="100" />
+        <property name="maxStatements"      value="0" />
         <property name="initialPoolSize"    value="3" />
-        <property name="maxIdleTime"        value="10"/>
-        <property name="idleConnectionTestPeriod"   value="10" />
+        <property name="maxIdleTime"        value="30"/>
+        <property name="idleConnectionTestPeriod"   value="30" />
         <property name="testConnectionOnCheckin"    value="true" />
         <property name="testConnectionOnCheckout"   value="false" />
         <property name="preferredTestQuery"         value="SELECT 1 FROM DUAL" />

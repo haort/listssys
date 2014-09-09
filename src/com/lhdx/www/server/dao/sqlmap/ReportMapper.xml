@@ -4,7 +4,7 @@
 <mapper namespace="com.lhdx.www.server.dao.ReportDao">
 	<select id="selectReports" resultMap="reportMap" parameterType="java.util.HashMap">
 		select
-		id,servName,prodId,servAddr,accsNbr,ty,speed,startdt,prodTel,bipDataNum,bipDuration,area,rsrc,itvProdId,packName,kpiProdId,phone,wareName,gridName,own,deep,state,chName
+		id,servName,prodId,servAddr,telephone,accsNbr,ty,speed,startdt,prodTel,bipDataNum,bipDuration,area,rsrc,itvProdId,packName,kpiProdId,phone,wareName,gridName,own,deep,state,chName,remark,stateDate
 		from
 		${table}
 		<where>
@@ -13,6 +13,7 @@
 	       </if>
 			<if test="user.area !=null and user.area !=''">
 				and area = #{user.area}
+				and state in ('未呼通','未外呼')
 	       </if>
 			<if test="user.chName !=null and user.chName !=''">
 				and chName = #{user.chName}
@@ -31,6 +32,7 @@
 	       </if>
 			<if test="user.area !=null and user.area !=''">
 				and area = #{user.area}
+				and state in ('未呼通','未外呼')
 	       </if>
 			<if test="user.chName !=null and user.chName !=''">
 				and chName = #{user.chName}
@@ -41,6 +43,7 @@
 	<update id="updateReportById" parameterType="java.util.HashMap">
 		update ${table} set
 		state = #{state},
+		remark = #{remark},
 		stateDate = #{stateDate}
 		where id = #{id}
     </update>
@@ -90,6 +93,9 @@
 		<result property="deep" column="deep" />
 		<result property="state" column="state" />
 		<result property="chName" column="chName" />
+		<result property="remark" column="remark" />
+		<result property="stateDate" column="stateDate" />
+		<result property="telephone" column="telephone" />
 	</resultMap>
 
 	<update id="createTableByName" parameterType="java.util.Map">
@@ -98,10 +104,13 @@
 		`id` int(11) NOT NULL auto_increment,
 		`servName` varchar(255)
 		DEFAULT NULL,
+		`remark` varchar(255)
+		DEFAULT NULL,
 		`prodId` varchar(255) DEFAULT NULL,
 		`servAddr`
 		varchar(255) DEFAULT NULL,
 		`accsNbr` varchar(255) DEFAULT NULL,
+		`telephone` varchar(255) DEFAULT NULL,
 		`ty`
 		varchar(255) DEFAULT NULL,
 		`speed` varchar(255) DEFAULT NULL,

@@ -73,6 +73,7 @@ public class FileUploadController {
 	            	r.setGridName(sheet.getCell(17, i).getContents());
 	            	r.setAreaName(sheet.getCell(18, i).getContents());
 	            	r.setChName(sheet.getCell(19, i).getContents());
+	            	r.setTelephone(sheet.getCell(20, i).getContents());
 	            	reports.add(r);
 	          } 
 	          book.close();

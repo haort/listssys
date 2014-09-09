@@ -7,9 +7,14 @@
         {header: '状态',  dataIndex: 'state',  flex: 1,editor : {
              	 xtype : 'coboview',
              	 }},
+             	{header: '备注',  dataIndex: 'remark',  flex: 1,editor : {
+                 	 xtype : 'textfield',
+                 	 }},
+                 {header: '更新时间'  ,dataIndex: 'formatDate'  ,flex: 1},
                  {header: '姓名'  ,dataIndex: 'servName'  ,flex: 1},
                  {header: '地址'  ,dataIndex: 'servAddr'  ,flex: 1,hidden: true},
                  {header: '宽带号'  ,dataIndex: 'accsNbr'  ,flex: 1},
+                 {header: '固定电话'  ,dataIndex: 'telephone'  ,flex: 1},
                  {header: '套餐'  ,dataIndex: 'ty'  ,flex: 1},
                  {header: '速率'  ,dataIndex: 'speed'  ,flex: 0.5},
                  {header: '起始日期'  ,dataIndex: 'startdt'  ,flex: 1,hidden: true},

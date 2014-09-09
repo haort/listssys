@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class Report {
 	private int id;
 	private String servName;
+	private String remark;
 	private String prodId;
 	private String servAddr;
 	private String accsNbr;
@@ -28,6 +29,8 @@ public class Report {
 	private int deep;
 	private String state;
 	private Timestamp stateDate;
+	private String formatDate;
+	private String telephone;
 	public int getId() {
 		return id;
 	}
@@ -178,6 +181,24 @@ public class Report {
 	}
 	public void setStateDate(Timestamp stateDate) {
 		this.stateDate = stateDate;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getFormatDate() {
+		return formatDate;
+	}
+	public void setFormatDate(String formatDate) {
+		this.formatDate = formatDate;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 	
 }

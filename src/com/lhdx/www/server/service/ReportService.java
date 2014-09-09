@@ -1,6 +1,9 @@
 package com.lhdx.www.server.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +32,7 @@ public class ReportService {
 		 List<Report> list = reportDao.selectReports(start, size, table,user,isSend);
 		 long count = reportDao.countReports(table,user,isSend);
 		 Map<String,Object> map = new HashMap<String,Object>();  
-	     map.put("users", list);  
+	     map.put("users", convertDate(list));  
 	     map.put("totalCount", count);
 	    
 		return map;
@@ -58,6 +61,35 @@ public class ReportService {
 	}
 	
 	public int findParentIdByName(){
-		return 1;
+		DateFormat sdf = new SimpleDateFormat("yyyyMM"); 
+		String name = sdf.format(System.currentTimeMillis());
+		Tree tree =treeDao.findByName(name);
+		if(tree !=null){
+			return tree.getNid();
+		}else{
+			Tree root = new Tree();
+			tree.setId(name);
+			tree.setLeaf(false);
+			tree.setParentid(-1);
+			tree.setText(name);
+			tree.setDescription(name);
+			treeDao.addTree(tree);
+			return treeDao.findByName(name).getNid();
+		}
+		
 	}
+	
+	public List<Report> convertDate(List<Report> list){
+		DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+		Iterator<Report> i = list.iterator();
+		while(i.hasNext()){
+			Report r = i.next();
+			if(r.getStateDate()!=null&&!"".equals(r.getStateDate())){
+				r.setFormatDate(sdf.format(r.getStateDate()));
+			}
+			
+		}
+		return list;
+	}
+	
 }

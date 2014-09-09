@@ -12,6 +12,12 @@
 		select nid,id,text,leaf,description from reporttable
 		where parentid = #{nid}
 	</select>
+	
+	<select id="selectTreeByName" resultMap="treeMap"
+		parameterType="java.util.HashMap">
+		select nid,id,text,leaf,description from reporttable
+		where text = #{name}
+	</select>
 
 	<insert id="addTree" parameterType="com.lhdx.www.server.model.Tree">
 		insert into reporttable

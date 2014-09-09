@@ -14,6 +14,7 @@ public class TreeDao extends BaseDao {
 	private static final String SELECTTREENODE = ".selectTreeNode";
 	private static final String SELECTTREENODEBYPARENTID = ".selectTreeNodeByParentId";
 	private static final String ADDTREE = ".addTree";
+	private static final String SELECTTREEBYNAME = ".selectTreeByName";
 
 	
 	public List<Tree> selectTreeNode() {
@@ -28,5 +29,11 @@ public class TreeDao extends BaseDao {
 
 	public void addTree(Tree tree){
 		sqlSession.insert(NAMESPACE+ADDTREE, tree);
+	}
+	
+	public Tree findByName(String name){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("name", name);
+		return sqlSession.selectOne(NAMESPACE + SELECTTREEBYNAME,map);
 	}
 }

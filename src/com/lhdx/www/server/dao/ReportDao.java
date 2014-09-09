@@ -44,6 +44,7 @@ public class ReportDao extends BaseDao {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("id", r.getId());
 		map.put("state", r.getState());
+		map.put("remark", r.getRemark());
 		map.put("table", table);
 		map.put("stateDate", stateDate);
 		sqlSession.update(NAMESPACE + UPDATEREPORTBYID,map);
